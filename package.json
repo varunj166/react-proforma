@@ -1,0 +1,73 @@
+{
+  "name": "react-proforma",
+  "version": "1.0.0",
+  "description": "React Proforma helps you build simple to complex forms with ease in React for the web. -- Simplicity where you want it. Flexibility where you need it.",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc -p ./tsconfig.notests.json",
+    "tsc:rm": "rm -rf dist && tsc -p ./tsconfig.notests.json",
+    "tsc:w": "rm -rf dist && tsc -p ./tsconfig.notests.json -w",
+    "test": "jest",
+    "test:c": "jest --runInBand --no-cache",
+    "test:v": "jest --runInBand --verbose",
+    "test:w": "jest --watchAll --runInBand --no-cache",
+    "test:wv": "jest --watchAll --runInBand --verbose",
+    "jest:cc": "jest --clear-cache"
+  },
+  "keywords": [
+    "react",
+    "react-dom",
+    "proforma",
+    "form",
+    "forms",
+    "validation",
+    "helper",
+    "wrapper",
+    "formik",
+    "final",
+    "alternative"
+  ],
+  "author": "Varun Jain",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varunj166/react-proforma.git"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "dependencies": {
+    "memoize-one": "^5.1.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.3",
+    "@testing-library/react": "^9.3.2",
+    "@types/jest": "^24.0.21",
+    "@types/react": "^16.9.11",
+    "jest": "^24.9.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  },
+  "files": [
+    "dist",
+    "index.d.ts",
+    "index.js"
+  ],
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": false
+      }
+    },
+    "preset": "ts-jest",
+    "setupFilesAfterEnv": [
+      "<rootDir>src/setupTests.ts"
+    ],
+    "testEnvironment": "jsdom",
+    "roots": [
+      "<rootDir>src/__tests__/"
+    ]
+  }
+}
