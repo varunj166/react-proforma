@@ -4,7 +4,7 @@
 
 > **Simplicity where you want it. Flexibility where you need it.**
 
-Easily manage multiple form fields, validation, focus handling, and form submission. Use custom components (styled with css-in-js or from a UI library) or standard react elements anywhere you like. React Proforma is a complete form-solution that will make building your next React web form a breeze!
+Easily manage multiple form fields, validation, focus handling, and form submission. Use custom components (styled with css-in-js or from a UI library) or standard react elements anywhere you like. React Proforma is a complete form-solution that has been performance-optimized, and will make building your next React web form a breeze!
 
 ---
 
@@ -22,6 +22,14 @@ Easily manage multiple form fields, validation, focus handling, and form submiss
   - [Cross-Field Validation](#cross-field-validation)
   - [Displaying Errors](#displaying-errors)
     - [Enter `fieldError()`](#enter-fielderror)
+  - [Wrap-up](#wrap-up)
+- [## Typescript](#-typescript)
+- [Going Further](#going-further)
+  - [`customOnChange`](#customonchange)
+- [### Using Custom Components/UI LIbs](#-using-custom-componentsui-libs)
+- [## API](#-api)
+- [## Running tests](#-running-tests)
+- [What About Formik?](#what-about-formik)
 
 ---
 
@@ -469,8 +477,28 @@ As in:
 </div>
 {fieldError('name', FieldError)} /* <--- */
 ```
->You could put `fieldError()` anywhere of course.
+>NOTE: You could put `fieldError()` anywhere of course.
 
 And just like that we have:
 
 ![Demo Form 2d](demo/screenshots/demo-form-2-d.png "Demo Form 2d")
+
+### Wrap-up
+
+There's a **lot** more built into React Proforma, including other pre-wired components ([`Select`](#select), [`Checkbox`](#checkbox), [`Radio`](#radio), [`Textarea`](#textarea)), and [`Reset`](#reset), using custom components (like from a UI library or created by a css-in-js library) instead of standard React elements, and giving you access to more of your form's functionality through the methods and properties inside the [`ProformaBundle`](#proformabundle).
+
+[Browse the API](#api) to learn about everything that React Proforma offers you, and [check out some examples](/examples).
+
+---
+## Typescript
+---
+## Going Further
+
+### `customOnChange`
+### Using Custom Components/UI LIbs
+---
+## API
+---
+## Running tests
+---
+## What About Formik?
