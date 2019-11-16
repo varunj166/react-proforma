@@ -279,23 +279,6 @@ export class Proforma<V> extends React.PureComponent<
     // }
   }
 
-  // proformaBundle: ProformaBundle<V> = {
-  //   values: { ...this.state.values },
-  //   touched: { ...this.state.touched },
-  //   errors: { ...this.state.errors },
-  //   isSubmitting: this.state.isSubmitting,
-  //   isComplete: this.state.isComplete,
-  //   handleChange: this.handleChange,
-  //   handleFocus: this.handleFocus,
-  //   handleBlur: this.handleBlur,
-  //   handleSubmit: this.handleSubmit,
-  //   handleReset: this.handleReset,
-  //   setSubmitting: this.setSubmitting,
-  //   setValues: this.setValues,
-  //   setComplete: this.setComplete,
-  //   submitCount: this.state.submitCount
-  // };
-
   computeProformaBundle() {
     const {
       values,

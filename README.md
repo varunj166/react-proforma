@@ -2,7 +2,7 @@
 
 ### React Proforma helps you build simple to complex forms with ease in React for the web. <!-- omit in toc -->
 
-> **Simplicity where you want it. Flexibility where you need it.**
+**Simplicity where you want it. Flexibility where you need it.**
 
 Easily manage multiple form fields, validation, focus handling, and form submission. Use custom components (styled with css-in-js or from a UI library) or standard react elements anywhere you like. React Proforma is a complete form-solution that has been performance-optimized, and will make building your next React web form a breeze!
 
@@ -25,8 +25,8 @@ Easily manage multiple form fields, validation, focus handling, and form submiss
   - [Wrap-up](#wrap-up)
 - [Typescript](#typescript)
 - [Going Further](#going-further)
-  - [`customOnChange`](#customonchange)
   - [Using Custom Components/UI LIbs](#using-custom-componentsui-libs)
+  - [`customOnChange`](#customonchange)
 - [API](#api)
 - [Running tests](#running-tests)
 - [What About Formik?](#what-about-formik)
@@ -45,8 +45,9 @@ Install using npm:
 
 We'll start by building up a very basic, no-frills example with a single field and a submit button, just to give you a feel for what's going on. After that, I'll demonstrate code that is more like what you would normally use, including using React Proforma's custom form elements that are all hooked up internally.
 
-> - I prefer using class components because I find they better organize my code. You are, of course, free to use function components.
-> - **_All exports are named exports_**, so don't forget your curly brackets on your import statements!
+Please note:
+- I prefer using class components because I find they better organize my code. You are, of course, free to use function components.
+- **_All exports are named exports_**, so don't forget your curly brackets on your import statements!
 
 ### Step 1: Build the basic scaffolding:
 
@@ -152,7 +153,7 @@ class DemoForm1 extends React.Component {
 }
 ```
 
-> I know this looks ugly, but React Proforma's custom form elements will clean this all up very quickly! I just wanted to show you the manual set up first.
+**I know this looks ugly, but React Proforma's custom form elements will clean this all up very quickly! I just wanted to show you the manual set up first.**
 
 - We begin by destructuring out `values`, `handleSubmit`, `handleChange`, `handleFocus`, and `handleBlur` from `proformaBundle`.
   - I will be using the more conventional destructuring-in-place later on whenever I need anything from `proformaBundle`. [See the docs](#proformaBundle) for a full breakdown of all the properties and methods you can access from inside `proformaBundle`.
@@ -245,11 +246,12 @@ class DemoForm2 extends React.Component {
 }
 ```
 With some styling divs here and there, this code produces the following form:
-> [Grab the css file](demo/DemoForm2.css) if you want to follow along exactly.
+
+**([Grab the css file](demo/DemoForm2.css) if you want to follow along exactly.)**
 
 ![Demo Form 2a](demo/screenshots/demo-form-2-a.png "Demo Form 2a")
 
-> NOTE: That window you see on the right is a `Debug` component I made in case you ever want to see the current internal Proforma state. Just `import { Debug } from 'react-proforma'` and insert the component anywhere.
+**NOTE: That window you see on the right is a `Debug` component I made in case you ever want to see the current internal Proforma state. Just `import { Debug } from 'react-proforma'` and insert the component anywhere.**
 
 The styling divs clutter things up a little, but I want you to just focus on the props passed to the `Proforma` component, as well as the `Form` element inside the `renderForm` method.
 
@@ -325,12 +327,12 @@ validationObject: {
   }
 }
 ```
-- Inside the function, pass `fieldValidator` the value you want to validated (in this case, it's "values\.name"), and then chain on whatever validations you want. 
+- Inside the function, pass to `fieldValidator` the value you want to validated (in this case, it's "values\.name"), and then chain on whatever validations you want. 
 - Here, I've used `.required()` and `.regex()`.
 - All validator methods have default error messages, but you can optionally use your own, as I did here with the `regex()` call.
 - [See the `fieldValidator` docs](#fieldValidator) for all of the methods available to you.
 
-> NOTE: You must add `.end()` to the end of the `fieldValidator` chain, and return the entire chain from the function! (I.e. `return fieldValidator(values.name) ..... .end()`)
+**NOTE: You must add `.end()` to the end of the `fieldValidator` chain, and return the entire chain from the function! (I.e. `return fieldValidator(values.name) ..... .end()`)**
 
 With this new tool, let's go ahead and add email and password validation in just a few seconds:
 
@@ -362,14 +364,14 @@ validationObject: {
   }
 }
 ```
-> NOTE: I pass the entire values object to each validation field so that you can access other values if that's what your validation requires. For more information, [see the `fieldValidator` docs](#fieldValidator).
+**NOTE: I pass the entire values object to each validation field so that you can access other values if that's what your validation requires. For more information, [see the `fieldValidator` docs](#fieldValidator).**
 
 Now we can take our form for a spin. Enter valid and invalid values, and see the 'Errors' object update in the `Debug` display.
 
 For example:
 ![Demo Form 2b](demo/screenshots/demo-form-2-b.png "Demo Form 2b")
 
->NOTE: The 'Touched' value for each field name turns `true` when a field recieves and then loses focus. This is useful for displaying errors to the user, which is typically done only if 'touched' is `true` for that field name.
+**NOTE: The 'Touched' value for each field name turns `true` when a field recieves and then loses focus. This is useful for displaying errors to the user, which is typically done only if 'touched' is `true` for that field name.**
 
 So this is all working quite nicely. But let's go ahead and try something a little more challenging, and see how React Proforma performs.
 
@@ -392,7 +394,7 @@ Add the following to your `Form` inside `renderForm`, before the `Submit` button
   />
 </div>
 ```
-> NOTE: the '**name**' I used for this new field is '**password2**'.
+**NOTE: The 'name' I used for this new field is 'password2'.**
 
 And update your `initialValues` object:
 
@@ -404,11 +406,9 @@ initialValues: {
   password2: ''
 }
 ```
-> REMINDER: All form field names must be present in the `initialValues` object, or it won't be included in any of React Proforma's functionality.
+**REMINDER: All form field names must be present in the `initialValues` object, or it won't be included in any of React Proforma's functionality.**
 
 Now we need to add validation to 'password2' to make sure it matches, 'password'.
-
-Watch this.
 
 Add the following property to your `validationObject`:
 
@@ -477,7 +477,7 @@ As in:
 </div>
 {fieldError('name', FieldError)} /* <--- */
 ```
->NOTE: You could put `fieldError()` anywhere of course.
+**NOTE: You could insert `fieldError()` anywhere of course.**
 
 And just like that we have:
 
@@ -497,11 +497,11 @@ TODO
 ---
 ## Going Further
 
-### `customOnChange`
+### Using Custom Components/UI LIbs
 
 TODO
 
-### Using Custom Components/UI LIbs
+### `customOnChange`
 
 TODO
 
