@@ -284,14 +284,16 @@ First, let's do it the long way:
     validationObject: {
       name: (values) => {
         const { name } = values;
-        const errors = []
+        const errors = [];
         if (name.length === 0) {
           errors.push('This field is required.');
         }
         if (!/^[a-zA-Z\s]*$/.test(name)) {
           errors.push('Your name can only contain letters and spaces.');
         }
-        if (errors.length > 0) return errors;
+        if (errors.length > 0) {
+          return errors;
+        }
         return null;
       }
     }
@@ -408,7 +410,7 @@ initialValues: {
 ```
 **REMINDER: All form field names must be present in the `initialValues` object, or it won't be included in any of React Proforma's functionality.**
 
-Now we need to add validation to 'password2' to make sure it matches, 'password'.
+Now we need to add validation to 'password2' to make sure it matches 'password'.
 
 Add the following property to your `validationObject`:
 
@@ -492,7 +494,68 @@ There's a **lot** more built into React Proforma, including other pre-wired comp
 ---
 ## Typescript
 
-TODO
+Here is where React Proforma really shines. This entire library was written in Typescript, so I take full advantage of Typescript's awesome features wherever possible.
+
+[Check out this example](/examples/DemoForm2.tsx) for reference.
+
+I'd like to point out a few things:
+
+1. The `Proforma` component is a generic class, so you just have to drop in the `type` that represents your form values, and `Proforma` propogates that around wherever possible.
+   - Example:
+```typescript
+type ValuesType = {
+  name: string;
+  email: string;
+  password: string;
+  newsletter: boolean;
+};
+
+/* Skip to component render method */
+render() {
+  return (
+    <Proforma<ValuesType>
+      config={{...}}
+      handleSubmit={() => {...}}
+    >
+      {this.renderForm}
+    </Proforma>
+  );
+}
+```
+**If you didn't know how to pass in a type variable to a component in JSX before, now you know!**
+
+2. In your `renderForm` method, in order to have your `proformaBundle` argument fully types, you have to import `ProformaBundle`, which is a generic type which expects your `ValuesType` again. As in:
+
+```typescript
+import { ProformaBundle } from 'react-proforma';
+
+type ValuesType = {
+  name: string;
+  email: string;
+  password: string;
+  newsletter: boolean;
+};
+
+/* Skip to renderForm method */
+renderForm(proformaBundle: ProformaBundle<ValuesType>) {
+  /* renderForm logic */
+}
+```
+
+Or with in-line destructing:
+
+```typescript
+renderForm({
+  values,
+  errors,
+  touched,
+  handleSubmit,
+  handleRest,
+  /* whatever else you need from ProformaBundle */
+}: ProformaBundle<ValuesType>) {
+  /* renderForm logic */
+}
+```
 
 ---
 ## Going Further
@@ -518,4 +581,10 @@ TODO
 ---
 ## What About Formik?
 
-TODO
+I am of course aware of Formik, seeing as it's the most popular React form helper library out there. And I did work with Formik a bit, but there were design choices that annoyed me, and for something as frequently needed as a form helper library, I didn't want to have to conform to someone else's designs. 
+
+That's what inspired me to build React Proforma. Everything about it is exactly how I would have wanted someone else's form helper library to be. And since that wasn't out there, I made it myself.
+
+It works *really* well for me, and I hope it works for you, too!
+
+-vJ
