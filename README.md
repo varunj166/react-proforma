@@ -23,12 +23,12 @@ Easily manage multiple form fields, validation, focus handling, and form submiss
   - [Displaying Errors](#displaying-errors)
     - [Enter `fieldError()`](#enter-fielderror)
   - [Wrap-up](#wrap-up)
-- [## Typescript](#-typescript)
+- [Typescript](#typescript)
 - [Going Further](#going-further)
   - [`customOnChange`](#customonchange)
-- [### Using Custom Components/UI LIbs](#-using-custom-componentsui-libs)
-- [## API](#-api)
-- [## Running tests](#-running-tests)
+  - [Using Custom Components/UI LIbs](#using-custom-componentsui-libs)
+- [API](#api)
+- [Running tests](#running-tests)
 - [What About Formik?](#what-about-formik)
 
 ---
@@ -491,14 +491,31 @@ There's a **lot** more built into React Proforma, including other pre-wired comp
 
 ---
 ## Typescript
+
+TODO
+
 ---
 ## Going Further
 
 ### `customOnChange`
+
+TODO
+
 ### Using Custom Components/UI LIbs
+
+TODO
+
 ---
 ## API
+
+TODO
+
 ---
 ## Running tests
+
+TODO
+
 ---
 ## What About Formik?
+
+TODO
