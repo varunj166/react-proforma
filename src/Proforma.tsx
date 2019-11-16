@@ -1,17 +1,8 @@
 import React from 'react';
-import {
-  IndexableObjectType,
-  TouchedType,
-  ErrorsType,
-  IConfigObject,
-  ProformaBundle
-} from './types';
+import { IndexableObjectType, IConfigObject, ProformaBundle } from './types';
 import { generateStateObject, validator } from './helpers';
 import { ProformaContextProvider } from './ProformaContext';
 
-// ===============================
-// ====== TYPE DECLARATIONS ======
-// ===============================
 interface IProps<V> {
   config: IConfigObject<V>;
   handleSubmit: (
@@ -22,14 +13,15 @@ interface IProps<V> {
   ) => any;
 }
 
-interface IState<V> {
-  values: V;
-  touched: TouchedType<V>;
-  errors: ErrorsType<V>;
-  isSubmitting: boolean;
-  isComplete: boolean;
-  submitCount: number;
-}
+export type ProformaStateType<V> = Pick<
+  ProformaBundle<V>,
+  | 'values'
+  | 'touched'
+  | 'errors'
+  | 'isSubmitting'
+  | 'isComplete'
+  | 'submitCount'
+>;
 
 /**
  * The core component of the React Proforma library. It takes in a config object and a handleSubmit
@@ -55,8 +47,10 @@ interface IState<V> {
  */
 export class Proforma<V> extends React.PureComponent<
   IProps<V>,
-  IState<V & IndexableObjectType>
+  ProformaStateType<V>
 > {
+  proformaBundle: ProformaBundle<V>;
+
   constructor(props: IProps<V>) {
     super(props);
     if (!this.props.config)
@@ -71,10 +65,44 @@ export class Proforma<V> extends React.PureComponent<
       console.warn(
         'You have not provided a handleSubmit function prop to the Proforma component. React Proforma will still work. However, when your form is submitted, nothing will happen.'
       );
-  }
-  state = generateStateObject<V>(this.props.config.initialValues);
+    this.state = generateStateObject<V>(this.props.config.initialValues);
 
-  validateField = (name: string) => {
+    // Forced to use bind approach because class property syntax brings
+    // class property methods to top of constructor before prop error checking
+    // can be run.
+    this.validateField = this.validateField.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.setValues = this.setValues.bind(this);
+    this.setSubmitting = this.setSubmitting.bind(this);
+    this.setComplete = this.setComplete.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+    this.computeProformaBundle = this.computeProformaBundle.bind(this);
+
+    this.proformaBundle = {
+      values: { ...this.state.values },
+      touched: { ...this.state.touched },
+      errors: { ...this.state.errors },
+      isSubmitting: this.state.isSubmitting,
+      isComplete: this.state.isComplete,
+      handleChange: this.handleChange,
+      handleFocus: this.handleFocus,
+      handleBlur: this.handleBlur,
+      handleSubmit: this.handleSubmit,
+      handleReset: this.handleReset,
+      setSubmitting: this.setSubmitting,
+      setValues: this.setValues,
+      setComplete: this.setComplete,
+      submitCount: this.state.submitCount
+    };
+  }
+  // state: ProformaStateType<V> = generateStateObject<V>(
+  //   this.props.config.initialValues
+  // );
+
+  validateField(name: string) {
     const { validationObject } = this.props.config;
     if (validationObject && validationObject[name]) {
       this.setState((prevState) => ({
@@ -84,9 +112,9 @@ export class Proforma<V> extends React.PureComponent<
         }
       }));
     }
-  };
+  }
 
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -115,11 +143,9 @@ export class Proforma<V> extends React.PureComponent<
         }
       }
     );
-  };
+  }
 
-  handleFocus = (
-    event: React.FocusEvent<HTMLInputElement | HTMLButtonElement>
-  ) => {
+  handleFocus(event: React.FocusEvent<HTMLInputElement | HTMLButtonElement>) {
     if (this.props.config.resetTouchedOnFocus) {
       const target = event.target;
       const name = target.name;
@@ -133,11 +159,9 @@ export class Proforma<V> extends React.PureComponent<
         }));
       }
     }
-  };
+  }
 
-  handleBlur = (
-    event: React.FocusEvent<HTMLInputElement | HTMLButtonElement>
-  ) => {
+  handleBlur(event: React.FocusEvent<HTMLInputElement | HTMLButtonElement>) {
     const target = event.target;
     const name = target.name;
 
@@ -154,9 +178,9 @@ export class Proforma<V> extends React.PureComponent<
         }
       );
     }
-  };
+  }
 
-  setValues = (setToObj: IndexableObjectType) => {
+  setValues(setToObj: IndexableObjectType) {
     if (typeof setToObj !== 'object') return;
     const keys = Object.keys(setToObj);
     const tmpObj: IndexableObjectType = {};
@@ -211,19 +235,19 @@ export class Proforma<V> extends React.PureComponent<
         }
       );
     }
-  };
+  }
 
-  setSubmitting = (setTo: boolean) => {
+  setSubmitting(setTo: boolean) {
     this.setState({ isSubmitting: setTo });
-  };
+  }
 
-  setComplete = (setTo: boolean) => {
+  setComplete(setTo: boolean) {
     this.setState({ isComplete: setTo });
-  };
+  }
 
-  handleSubmit = (
+  handleSubmit(
     event: React.FormEvent<HTMLFormElement> | React.SyntheticEvent<HTMLElement>
-  ) => {
+  ) {
     event.preventDefault();
     if (this.state.isSubmitting === false) {
       this.setState(
@@ -243,33 +267,34 @@ export class Proforma<V> extends React.PureComponent<
         }
       );
     }
-  };
+  }
 
-  handleReset = (event: React.SyntheticEvent<HTMLElement>) => {
+  handleReset(event: React.SyntheticEvent<HTMLElement>) {
     // if (event.target === event.currentTarget) {
+    event.preventDefault();
     event.stopPropagation();
     this.setState({
       ...generateStateObject<V>(this.props.config.initialValues)
     });
     // }
-  };
+  }
 
-  proformaBundle: ProformaBundle<V> = {
-    values: { ...this.state.values },
-    touched: { ...this.state.touched },
-    errors: { ...this.state.errors },
-    isSubmitting: this.state.isSubmitting,
-    isComplete: this.state.isComplete,
-    handleChange: this.handleChange,
-    handleFocus: this.handleFocus,
-    handleBlur: this.handleBlur,
-    handleSubmit: this.handleSubmit,
-    handleReset: this.handleReset,
-    setSubmitting: this.setSubmitting,
-    setValues: this.setValues,
-    setComplete: this.setComplete,
-    submitCount: this.state.submitCount
-  };
+  // proformaBundle: ProformaBundle<V> = {
+  //   values: { ...this.state.values },
+  //   touched: { ...this.state.touched },
+  //   errors: { ...this.state.errors },
+  //   isSubmitting: this.state.isSubmitting,
+  //   isComplete: this.state.isComplete,
+  //   handleChange: this.handleChange,
+  //   handleFocus: this.handleFocus,
+  //   handleBlur: this.handleBlur,
+  //   handleSubmit: this.handleSubmit,
+  //   handleReset: this.handleReset,
+  //   setSubmitting: this.setSubmitting,
+  //   setValues: this.setValues,
+  //   setComplete: this.setComplete,
+  //   submitCount: this.state.submitCount
+  // };
 
   computeProformaBundle() {
     const {

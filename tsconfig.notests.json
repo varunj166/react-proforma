@@ -2,7 +2,10 @@
 	"extends": "./tsconfig.json",	
 	"exclude": [
 		"node_modules",
-		"dist",
+    "dist",
+    "src/__tests__",
+    "demo",
+    "examples",
 		"src/setupTests.ts",
 		"src/test-utils",
 		"**/*.test.ts",			
@@ -10,7 +13,6 @@
 		"**/*.off.ts",			
 		"**/*.test.tsx",
 		"**/*.spec.tsx",
-		"**/*.off.tsx",
-		"src/__tests__"
+		"**/*.off.tsx"		
 	]
 }

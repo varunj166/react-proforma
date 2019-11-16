@@ -2,7 +2,7 @@ import { generateStateObject, validator } from '../helpers';
 
 describe('generateStateObject function', () => {
   it('Returns correct state object (1)', () => {
-    const initState = {
+    const initialValues = {
       field1: 'hello',
       field2: 99,
       field3: true
@@ -10,7 +10,7 @@ describe('generateStateObject function', () => {
     const expectedState = {
       values: {
         field1: 'hello',
-        field2: 99,
+        field2: '',
         field3: true
       },
       touched: {
@@ -28,13 +28,13 @@ describe('generateStateObject function', () => {
       submitCount: 0
     };
 
-    expect(generateStateObject<typeof initState>(initState)).toEqual(
+    expect(generateStateObject<typeof initialValues>(initialValues)).toEqual(
       expectedState
     );
   });
 
   it('Returns correct state object(2)', () => {
-    const initState = {
+    const initialValues = {
       field1: '',
       field2: null,
       field3: null
@@ -60,7 +60,7 @@ describe('generateStateObject function', () => {
       submitCount: 0
     };
 
-    expect(generateStateObject<typeof initState>(initState)).toEqual(
+    expect(generateStateObject<typeof initialValues>(initialValues)).toEqual(
       expectedState
     );
   });

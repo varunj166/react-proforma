@@ -48,7 +48,6 @@ const _SubmitButton: React.FunctionComponent<ISubmitProps &
     return (
       <button
         type="submit"
-        role="button"
         onClick={(event) => _handleClick(event, handleSubmit)}
         {...otherProps}
       >
@@ -59,7 +58,6 @@ const _SubmitButton: React.FunctionComponent<ISubmitProps &
   return (
     <button
       type="submit"
-      role="button"
       onClick={(event) => _handleClick(event, handleSubmit)}
       {...otherProps}
     >

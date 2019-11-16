@@ -1,11 +1,20 @@
 import { IndexableObjectType, IValidationObject } from './types';
+import { ProformaStateType } from './Proforma';
 
-export function generateStateObject<V>(initState: V & IndexableObjectType) {
+export function generateStateObject<V>(
+  initState: V & IndexableObjectType
+): ProformaStateType<V> {
   const keys = Object.keys(initState);
   const stateObj = keys.reduce<any>(
     (result, key) => {
-      result.values[key] =
-        initState[key] === false ? false : initState[key] || '';
+      if (
+        typeof initState[key] === 'boolean' ||
+        typeof initState[key] === 'string'
+      ) {
+        result.values[key] = initState[key];
+      } else {
+        result.values[key] = '';
+      }
       result.touched[key] = false;
       result.errors[key] = null;
       return result;

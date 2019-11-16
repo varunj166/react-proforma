@@ -27,12 +27,13 @@
     "final",
     "alternative"
   ],
-  "author": "Varun Jain",
+  "author": "Varun Jain (varunj166)",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/varunj166/react-proforma.git"
   },
+  "homepage": "https://github.com/varunj166/react-proforma#readme",
   "peerDependencies": {
     "react": "^16.8.0"
   },

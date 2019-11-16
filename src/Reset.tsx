@@ -31,13 +31,13 @@ const _ResetButton: React.FunctionComponent<IMemoResetProps &
 
   if (!children) {
     return (
-      <button onClick={handleReset} role="button" type="button" {...otherProps}>
+      <button onClick={handleReset} type="reset" {...otherProps}>
         {text}
       </button>
     );
   }
   return (
-    <button onClick={handleReset} role="button" type="button" {...otherProps}>
+    <button onClick={handleReset} type="reset" {...otherProps}>
       {text}
       {children}
     </button>
@@ -63,13 +63,23 @@ const _ComponentResetButton: React.FunctionComponent<IMemoResetProps &
   if (Component) {
     if (!children) {
       return (
-        <Component onClick={handleReset} role="button" {...otherProps}>
+        <Component
+          onClick={handleReset}
+          type="reset"
+          role="button"
+          {...otherProps}
+        >
           {text}
         </Component>
       );
     }
     return (
-      <Component onClick={handleReset} role="button" {...otherProps}>
+      <Component
+        onClick={handleReset}
+        type="reset"
+        role="button"
+        {...otherProps}
+      >
         {text}
         {children}
       </Component>

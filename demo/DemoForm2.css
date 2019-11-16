@@ -1,0 +1,58 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+}
+
+.outer-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+
+.form-wrapper,
+.debug-wrapper {
+  width: 48%;
+}
+
+form {
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 15px;
+  border: 2px solid gray;
+}
+
+.field-row {
+  margin: 10px auto;
+}
+
+label {
+  font-size: 1.2rem;
+  display: block;
+}
+
+.form-field {
+  margin-top: 10px;
+  width: 90%;
+  font-size: 1.2rem;
+  padding: 4px;
+}
+
+button {
+  font-size: 1.6rem;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: #ecf0f1;
+}
+
+button.submit-button {
+  background-color: #2980b9;
+}
+
+.field-error {
+  color: red;
+  margin: 0;
+}
