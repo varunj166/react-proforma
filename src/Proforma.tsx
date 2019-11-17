@@ -53,6 +53,8 @@ export class Proforma<V> extends React.PureComponent<
 
   constructor(props: IProps<V>) {
     super(props);
+
+    // Check incoming props
     if (!this.props.config)
       throw new Error(
         'You must provide a "config" prop to the Proforma component.'
@@ -65,11 +67,13 @@ export class Proforma<V> extends React.PureComponent<
       console.warn(
         'You have not provided a handleSubmit function prop to the Proforma component. React Proforma will still work. However, when your form is submitted, nothing will happen.'
       );
+
+    // Generate state
     this.state = generateStateObject<V>(this.props.config.initialValues);
 
     // Forced to use bind approach because class property syntax brings
     // class property methods to top of constructor before prop error checking
-    // can be run.
+    // can be run and state object is generated.
     this.validateField = this.validateField.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);

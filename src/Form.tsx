@@ -4,8 +4,6 @@ import { ProformaContext } from './ProformaContext';
 
 interface IFormProps {
   component?: React.ComponentType<any>;
-  action?: string;
-  method?: string;
   style?: {
     [key: string]: string;
   };
@@ -33,6 +31,9 @@ export const Form: React.FunctionComponent<IFormProps & IndexableObjectType> = (
     component: Component,
     // strip away and discard the following props if present
     onSubmit,
+    onChange,
+    onInput,
+    onReset,
     // ****************************************************
     ...otherProps
   } = props;
