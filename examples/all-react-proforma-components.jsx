@@ -46,7 +46,7 @@ class AllComponents extends React.Component {
           <Checkbox name="checkboxInput" id="checkboxInput" />
         </div>
         <div>
-          <label htmlFor="textareaInput">Checkbox</label>
+          <label htmlFor="textareaInput">Textarea</label>
           <Textarea name="textareaInput" id="textareaInput" />
         </div>
         <div>

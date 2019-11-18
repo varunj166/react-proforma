@@ -14,7 +14,7 @@
     "test:w": "jest --watchAll --runInBand --no-cache",
     "test:wv": "jest --watchAll --runInBand --verbose",
     "jest:cc": "jest --clear-cache",
-    "coveralls": "jest --coverage && cat ./jest_coverage/lcov.info | coveralls"
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "react",
@@ -24,6 +24,7 @@
     "forms",
     "validation",
     "helper",
+    "library",
     "wrapper",
     "formik",
     "final",
@@ -73,6 +74,6 @@
     "roots": [
       "<rootDir>src/__tests__/"
     ],
-    "coverageDirectory": "./jest_coverage/"
+    "coverageDirectory": "./coverage/"
   }
 }
