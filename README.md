@@ -1,5 +1,7 @@
 ![Banner](images/banner.png 'Banner')
 
+[![Build Status](https://travis-ci.org/varunj166/react-proforma.svg?branch=master?type=flat)](https://travis-ci.org/varunj166/react-proforma)
+
 # React Proforma <!-- omit in toc -->
 
 ### React Proforma helps you build simple to complex forms with ease in React for the web. <!-- omit in toc -->
