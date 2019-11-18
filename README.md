@@ -5,7 +5,7 @@
 ## **Simplicity where you want it. Flexibility where you need it.** <!-- omit in toc -->
 <br />
 
-![npm](https://img.shields.io/npm/v/react-proforma)
+[![npm](https://img.shields.io/npm/v/react-proforma)](https://www.npmjs.com/package/react-proforma)
 [![Build Status](https://travis-ci.com/varunj166/react-proforma.svg?branch=master&style=flat)](https://travis-ci.com/varunj166/react-proforma)
 [![Coverage Status](https://coveralls.io/repos/github/varunj166/react-proforma/badge.svg?branch=master&style=flat)](https://coveralls.io/github/varunj166/react-proforma?branch=master)
 <br />
