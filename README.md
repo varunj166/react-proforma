@@ -20,7 +20,7 @@ Easily manage multiple form fields, validation, focus handling, and form submiss
 
 ---
 
-# Table of Contents <!-- omit in toc -->
+## Table of Contents <!-- omit in toc -->
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)

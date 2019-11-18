@@ -9,11 +9,12 @@
     "tsc:w": "rm -rf dist && tsc -p ./tsconfig.notests.json -w",
     "test": "jest",
     "test:c": "jest --runInBand --no-cache",
+    "test:cov": "jest --runInBand --coverage --no-cache",
     "test:v": "jest --runInBand --verbose",
     "test:w": "jest --watchAll --runInBand --no-cache",
     "test:wv": "jest --watchAll --runInBand --verbose",
     "jest:cc": "jest --clear-cache",
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
+    "coveralls": "jest --coverage && cat ./jest_coverage/lcov.info | coveralls"
   },
   "keywords": [
     "react",
@@ -71,6 +72,7 @@
     "testEnvironment": "jsdom",
     "roots": [
       "<rootDir>src/__tests__/"
-    ]
+    ],
+    "coverageDirectory": "./jest_coverage/"
   }
 }
