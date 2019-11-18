@@ -18,53 +18,52 @@ export class DemoForm2 extends React.Component {
   renderForm() {
     return (
       <div className="outer-wrapper">
-        <div className="form-wrapper">
-          <Form>
-            <div className="field-row">
-              <label htmlFor="name-field">Name:</label>
-              <Field
-                name="name"
-                type="text"
-                className="form-field"
-                id="name-field"
-                placeholder="E.g. Billy Bob"
-              />
-            </div>
-            {fieldError('name', FieldError)}
-            <div className="field-row">
-              <label htmlFor="email-field">Email:</label>
-              <Field
-                name="email"
-                type="text"
-                className="form-field"
-                id="email-field"
-                placeholder="E.g. billy@bob.com"
-              />
-            </div>
-            {fieldError('email', FieldError)}
-            <div className="field-row">
-              <label htmlFor="password-field">Password:</label>
-              <Field
-                name="password"
-                type="password"
-                className="form-field"
-                id="password-field"
-              />
-            </div>
-            {fieldError('password', FieldError)}
-            <div className="field-row">
-              <label htmlFor="password2-field">Re-enter Password:</label>
-              <Field
-                name="password2"
-                type="password"
-                className="form-field"
-                id="password2-field"
-              />
-            </div>
-            {fieldError('password2', FieldError)}
-            <Submit className="submit-button" />
-          </Form>
-        </div>
+        <Form>
+          <div className="field-row">
+            <label htmlFor="name-field">Name:</label>
+            <Field
+              name="name"
+              type="text"
+              className="form-field"
+              id="name-field"
+              placeholder="E.g. Billy Bob"
+            />
+          </div>
+          {fieldError('name', FieldError)}
+          <div className="field-row">
+            <label htmlFor="email-field">Email:</label>
+            <Field
+              name="email"
+              type="text"
+              className="form-field"
+              id="email-field"
+              placeholder="E.g. billy@bob.com"
+            />
+          </div>
+          {fieldError('email', FieldError)}
+          <div className="field-row">
+            <label htmlFor="password-field">Password:</label>
+            <Field
+              name="password"
+              type="password"
+              className="form-field"
+              id="password-field"
+            />
+          </div>
+          {fieldError('password', FieldError)}
+          <div className="field-row">
+            <label htmlFor="password2-field">Re-enter Password:</label>
+            <Field
+              name="password2"
+              type="password"
+              className="form-field"
+              id="password2-field"
+            />
+          </div>
+          {fieldError('password2', FieldError)}
+          <Submit className="submit-button" />
+          <Reset />
+        </Form>
         <div className="debug-wrapper">
           <Debug />
         </div>

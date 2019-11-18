@@ -478,7 +478,7 @@ password2: (values) => {
       }
     })
     .end();
-};
+}
 ```
 
 Here we are making use of the `custom()` method chained to `fieldValidator()`. `custom()` takes a function as it's sole argument, which will be executed by `custom()`. If your function returns a string value, that value will be added to the current error messages for that field.
@@ -491,7 +491,7 @@ password2: (values) => {
     .required()
     .equals(values.password, 'Your passwords must match exactly!')
     .end();
-};
+}
 ```
 
 [(See the docs for all available chaining methods and their specific signatures.)](#fieldvalidator)
