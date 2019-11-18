@@ -1,6 +1,6 @@
 {
   "name": "react-proforma",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Proforma helps you build simple to complex web forms with ease in React. -- Simplicity where you want it. Flexibility where you need it.",
   "main": "index.js",
   "scripts": {
