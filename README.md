@@ -7,6 +7,8 @@
 
 [![npm](https://img.shields.io/npm/v/react-proforma)](https://www.npmjs.com/package/react-proforma)
 [![Travis (.com) branch](https://img.shields.io/travis/com/varunj166/react-proforma/master)](https://travis-ci.com/varunj166/react-proforma)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-proforma)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/varunj166/react-proforma)
 [![Coveralls github](https://img.shields.io/coveralls/github/varunj166/react-proforma)](https://coveralls.io/github/varunj166/react-proforma?branch=master)
 <br />
 <br />
