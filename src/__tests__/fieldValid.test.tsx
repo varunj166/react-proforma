@@ -85,4 +85,21 @@ describe('fieldValid', () => {
 
     expect(result.container).toBeEmpty();
   });
+
+  it('Throws an error if a name arg is not provided', () => {
+    const name = (null as unknown) as string;
+    expect(() => fieldValid(name, CustomComponent, message)).toThrowError();
+  });
+
+  it('Throws an error if a component arg is not provided', () => {
+    const component = (null as unknown) as React.ComponentType<any>;
+    expect(() => fieldValid(testField, component, message)).toThrowError();
+  });
+
+  it('Throws an error if a message arg is not provided', () => {
+    const _message = (null as unknown) as string;
+    expect(() =>
+      fieldValid(testField, CustomComponent, _message)
+    ).toThrowError();
+  });
 });

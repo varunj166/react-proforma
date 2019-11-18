@@ -42,6 +42,42 @@ describe('Submit component', () => {
     expect(mockHandleSubmit).toHaveBeenCalledTimes(1);
   });
 
+  it('Executes handleSubmit from context when clicked (custom component)', () => {
+    const mockHandleSubmit = jest
+      .fn()
+      .mockImplementationOnce((event: React.FormEvent<HTMLFormElement>) =>
+        event.preventDefault()
+      );
+
+    const CustomComponent: React.FunctionComponent = ({
+      children,
+      ...otherProps
+    }) => (
+      <div data-testid="custom-component" {...otherProps}>
+        {children}
+      </div>
+    );
+
+    const tree = (
+      <ProformaContextProvider
+        value={{
+          handleSubmit: mockHandleSubmit
+        }}
+      >
+        <Submit component={CustomComponent} />
+      </ProformaContextProvider>
+    );
+
+    const result = render(tree);
+
+    expect(result.getByText('Submit')).toBeInTheDocument();
+
+    // click Submit button
+    fireEvent.click(result.getByText('Submit'));
+
+    expect(mockHandleSubmit).toHaveBeenCalledTimes(1);
+  });
+
   it('Displays "Submitting..." when context provider has value of isSubmitting: true', () => {
     const tree = (
       <ProformaContextProvider

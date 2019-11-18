@@ -106,7 +106,48 @@ describe('Proforma component', () => {
 		const newPara = await waitForElement(() => result.getByText(testText));
 
 		expect(newPara).toBeInTheDocument();
-	});
+  });
+  
+  it('Uses config.resetTouchedOnFocus to reset the touched boolean value onFocus', async () => {
+    const tree = (
+			<Proforma<ValuesType>
+				config={{
+          initialValues: initialValues,
+          resetTouchedOnFocus: true
+				}}
+				handleSubmit={() => {}}
+			>
+				{({
+					handleChange,
+					handleFocus,
+					handleBlur,
+					values,
+					touched
+				}: ProformaBundle<ValuesType>) => (
+					<form>
+						<input
+							type="text"
+							name="field"
+							onChange={handleChange}
+							onFocus={handleFocus}
+							onBlur={handleBlur}
+							value={values['field']}
+							data-testid={testId}
+						/>
+						{touched['field'] === false && <p>{testText}</p>}
+					</form>
+				)}
+			</Proforma>
+		);
+
+    const result = render(tree);
+    
+    fireEvent.focus(result.getByTestId(testId));
+    
+    const newPara = await waitForElement(() => result.getByText(testText));
+
+		expect(newPara).toBeInTheDocument();
+  });
 
 	it("Executes user's handleSubmit function when form is submitted", () => {
 		const mockHandleSubmit = jest.fn();
@@ -237,7 +278,12 @@ describe('Proforma component', () => {
 		const tree = (
 			<Proforma<ValuesType>
 				config={{
-					initialValues: initialValues
+          initialValues: initialValues,
+          validationObject: {
+            field: (values) => {
+              return ['error message'];
+            }
+          }
 				}}
 				handleSubmit={() => {}}
 			>

@@ -16,6 +16,83 @@ describe('Field component', () => {
   // 	mockConsoleError.mockRestore();
   // });
 
+  it('Throws an error if passed in invalid name prop', () => {
+    const mock = jest.fn().mockImplementation((error: any) => {});
+
+    const tree = (
+      <ProformaContextProvider
+        value={{
+          values: {
+            test: testValue1
+          }
+        }}
+      >
+        <Field name="test-wrong" data-testid="test" test-prop="test-prop" />
+      </ProformaContextProvider>
+    );
+
+    try {
+      expect(() => render(tree)).toThrowError();
+    } catch (error) {
+      mock(error);
+    }
+
+    // expect(mock).toHaveBeenCalledTimes(1);
+  });
+
+  it('Throws an error if passed in no name prop', () => {
+    const mock = jest.fn().mockImplementation((error: any) => {});
+    const _nullName = (null as unknown) as string;
+
+    const tree = (
+      <ProformaContextProvider
+        value={{
+          values: {
+            test: testValue1
+          }
+        }}
+      >
+        <Field name={_nullName} data-testid="test" test-prop="test-prop" />
+      </ProformaContextProvider>
+    );
+
+    try {
+      expect(() => render(tree)).toThrowError();
+    } catch (error) {
+      mock(error);
+    }
+
+    // expect(mock).toHaveBeenCalledTimes(1);
+  });
+
+  it('Throws an error if passed type=file', () => {
+    const mock = jest.fn().mockImplementation((error: any) => {});
+    const tree = (
+      <ProformaContextProvider
+        value={{
+          values: {
+            test: testValue1
+          }
+        }}
+      >
+        <Field
+          name="test"
+          type="file"
+          data-testid="test"
+          test-prop="test-prop"
+        />
+      </ProformaContextProvider>
+    );
+
+    try {
+      expect(() => render(tree)).toThrowError();
+    } catch (error) {
+      mock(error);
+    }
+
+    // expect(mock).toHaveBeenCalledTimes(1);
+  });
+
   describe('Standard Field', () => {
     afterEach(cleanup);
 

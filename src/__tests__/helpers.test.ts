@@ -70,7 +70,8 @@ describe('validator function', () => {
   const values = {
     field1: 'hello',
     field2: 'falafel',
-    field3: '35'
+    field3: '35',
+    field4: 'chickpea'
   };
 
   const validationObject = {
@@ -86,6 +87,10 @@ describe('validator function', () => {
         'error message 2 field3',
         'error messag 3 field 3'
       ];
+    },
+    field4: (vals: typeof values) => {
+      const invalidReturn = (true as unknown) as string;
+      return [invalidReturn];
     }
   };
 
@@ -105,5 +110,11 @@ describe('validator function', () => {
     expect(
       validator<typeof values>('field3', values, validationObject)
     ).toEqual([...validationObject.field3(values)]);
+  });
+
+  it('Throws an error with an invalid error return type', () => {
+    expect(() =>
+      validator<typeof values>('field4', values, validationObject)
+    ).toThrowError();
   });
 });
