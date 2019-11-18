@@ -6,8 +6,8 @@
 <br />
 
 [![npm](https://img.shields.io/npm/v/react-proforma)](https://www.npmjs.com/package/react-proforma)
-[![Build Status](https://travis-ci.com/varunj166/react-proforma.svg?branch=master&style=flat)](https://travis-ci.com/varunj166/react-proforma)
-[![Coverage Status](https://coveralls.io/repos/github/varunj166/react-proforma/badge.svg?branch=master&style=flat)](https://coveralls.io/github/varunj166/react-proforma?branch=master)
+[![Travis (.com) branch](https://img.shields.io/travis/com/varunj166/react-proforma/master)](https://travis-ci.com/varunj166/react-proforma)
+[![Coveralls github](https://img.shields.io/coveralls/github/varunj166/react-proforma)](https://coveralls.io/github/varunj166/react-proforma?branch=master)
 <br />
 <br />
 
