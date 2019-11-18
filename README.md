@@ -68,6 +68,10 @@ Install using npm:
 
 `npm install react-proforma`
 
+Or yarn:
+
+`yarn add react-proforma`
+
 ---
 
 ## Basic Usage
