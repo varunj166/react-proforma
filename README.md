@@ -3,9 +3,6 @@
 ![Banner](images/banner.png 'Banner')
 
 ## **Simplicity where you want it. Flexibility where you need it.** <!-- omit in toc -->
-
----
-
 <br />
 
 [![Node version](https://img.shields.io/node/v/react-proforma.svg?style=flat)](http://nodejs.org/download/)
