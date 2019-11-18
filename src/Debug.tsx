@@ -4,9 +4,6 @@ import { ProformaContext } from './ProformaContext';
 
 export interface IProps {}
 
-// =================================
-// ====== FUNCTION DEFINITION ======
-// =================================
 export function Debug(props: IProps): JSX.Element {
   const { values, errors, touched } = React.useContext<ProformaBundle<any>>(
     ProformaContext

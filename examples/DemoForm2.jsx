@@ -1,5 +1,5 @@
 import React from 'react';
-import './DemoForm2.css';
+import './DemoForm2.css'; /* css file located in <root>/demo/DemoForm2.css */
 import {
   Proforma,
   Form,
@@ -110,11 +110,7 @@ export class DemoForm2 extends React.Component {
             password2: (values) => {
               return fieldValidator(values.password2)
                 .required()
-                .custom(values, (values) => {
-                  if (values.password2 !== values.password) {
-                    return 'Your passwords must match exactly!';
-                  }
-                })
+                .equals(values.password, 'Your passwords must match exactly!')
                 .end();
             }
           }

@@ -287,7 +287,7 @@ describe('FieldValidator class', () => {
 
     it('Performs custom validation and returns error message', () => {
       const result = fieldValidator('test')
-        .custom<typeof values>(values, (values) => {
+        .custom(() => {
           if (values.field1 !== values.field2) {
             return testErrorMessage;
           }

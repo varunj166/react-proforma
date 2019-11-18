@@ -45,6 +45,9 @@ export function validator<V>(
         );
       }
     }
+  } else if (typeof errors === undefined || typeof errors === null) {
+    return null;
   }
+
   return errors;
 }

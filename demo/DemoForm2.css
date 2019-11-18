@@ -12,16 +12,16 @@ body {
   justify-content: space-evenly;
 }
 
-.form-wrapper,
-.debug-wrapper {
+.debug-wrapper,
+form {
   width: 48%;
 }
 
 form {
-  margin: 20px auto;
-  max-width: 600px;
+  margin-top: 20px;
   padding: 15px;
   border: 2px solid gray;
+  border-radius: 10px;
 }
 
 .field-row {

@@ -51,6 +51,7 @@ export interface ProformaBundle<V> {
   errors: ErrorsType<V>;
   isSubmitting: boolean;
   isComplete: boolean;
+  submitCount: number;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleFocus: (
     event: FocusEvent<HTMLInputElement | HTMLButtonElement>
@@ -63,5 +64,4 @@ export interface ProformaBundle<V> {
   setValues: SetValuesType;
   setSubmitting: (setTo: boolean) => void;
   setComplete: (setTo: boolean) => void;
-  submitCount: number;
 }

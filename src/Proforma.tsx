@@ -9,6 +9,7 @@ interface IProps<V> {
     values: V,
     setSubmitting: (setTo: boolean) => any,
     setComplete: (setTo: boolean) => any,
+    submtiCount: number,
     event: React.FormEvent<HTMLFormElement> | React.SyntheticEvent<HTMLElement>
   ) => any;
 }
@@ -265,6 +266,7 @@ export class Proforma<V> extends React.PureComponent<
               this.state.values,
               this.setSubmitting,
               this.setComplete,
+              this.state.submitCount,
               event
             );
           }

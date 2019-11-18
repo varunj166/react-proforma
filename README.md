@@ -14,19 +14,19 @@ Easily manage multiple form fields, validation, focus handling, and form submiss
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
-  - [Step 1: Build the basic scaffolding:](#step-1-build-the-basic-scaffolding)
+  - [Step 1: Build the scaffolding:](#step-1-build-the-scaffolding)
   - [Step 2: Add `config` and `handleSubmit` props to the `Proforma` component](#step-2-add-config-and-handlesubmit-props-to-the-proforma-component)
   - [Step 3: Fill in `renderForm`](#step-3-fill-in-renderform)
 - [Normal Usage](#normal-usage)
-  - [Form Skeleton](#form-skeleton)
+  - [Form Mark-Up](#form-mark-up)
   - [Validation](#validation)
   - [Cross-Field Validation](#cross-field-validation)
   - [Displaying Errors](#displaying-errors)
   - [Wrap-up](#wrap-up)
 - [Typescript](#typescript)
-- [Going Further](#going-further)
+- [Going further](#going-further)
   - [Using Custom Components/UI LIbs](#using-custom-componentsui-libs)
-  - [Using `customOnChange`](#using-customonchange)
+  - [Using `Proforma.config.customOnChange`](#using-proformaconfigcustomonchange)
 - [API](#api)
   - [Components](#components)
     - [Proforma](#proforma)
@@ -67,7 +67,7 @@ Please note:
 - I prefer using class components because I find they better organize my code. You are, of course, free to use function components.
 - **_All exports are named exports_**, so don't forget your curly brackets on your import statements!
 
-### Step 1: Build the basic scaffolding:
+### Step 1: Build the scaffolding:
 
 ```javascript
 import React from 'react';
@@ -75,7 +75,7 @@ import { Proforma } from 'react-proforma';
 
 class DemoForm1 extends React.Component {
   renderForm(proformaBundle) {
-    
+    /* to be filled in shortly */
   }
 
   render() {
@@ -88,7 +88,7 @@ class DemoForm1 extends React.Component {
 }
 ```
 
-- Notice how the component's `render` method is returning the `Proforma` component, and inside that is a reference to a function that I've called `renderForm`.
+- Notice how the component's `render` method is returning the `Proforma` component, and inside that is a reference to a function that I've called `renderForm` (which is currently empty).
 - The sole argument passed to `renderForm` is the bundle of methods and properties you will need for your form to function. I've assigned this argument the name `proformaBundle`.
 - Please note that **there are no parentheses** next to `this.renderForm`! This is a function reference, not a function invocation.
 
@@ -100,7 +100,7 @@ import { Proforma } from 'react-proforma';
 
 class DemoForm1 extends React.Component {
   renderForm(proformaBundle) {
-    
+    /* to be filled in shortly */
   }
 
   render() {
@@ -182,7 +182,7 @@ class DemoForm1 extends React.Component {
 **I know this looks ugly, but React Proforma's custom form elements will clean this all up very quickly! I just wanted to show you the manual set up first.**
 
 - We begin by destructuring out `values`, `handleSubmit`, `handleChange`, `handleFocus`, and `handleBlur` from `proformaBundle`.
-  - I will be using the more conventional destructuring-in-place later on whenever I need anything from `proformaBundle`. [See the docs](#proformaBundle) for a full breakdown of all the properties and methods you can access from inside `proformaBundle`.
+  - [See the ProformaBundle docs](#proformaBundle) for a full breakdown of all the properties and methods you can access from inside `proformaBundle`.
 - `renderForm` then returns a regular React form component.
 - I manually assign the various handlers to their respective event hooks in the `form` and `input` elements, set the `name` prop on the `input` element to be 'field1', and hook up the `value` prop of the input to `values.field1`.
 
@@ -190,13 +190,15 @@ At this point, we have a fully functioning form. The input is completely control
 
 ![Demo Form 1](demo/screenshots/demo-form-1.png 'Demo Form 1')
 
+[**Check out the complete code for this form here.**](/examples/DemoForm1.jsx)
+
 ---
 
 ## Normal Usage
 
 Now that you've seen the nuts and bolts, let's clean it up and create a more complete example, with multiple fields (and types of fields), validation, and custom components.
 
-### Form Skeleton
+### Form Mark-Up
 
 #### Introducing `Form`, `Field`, and `Submit` <!-- omit in toc -->
 
@@ -210,41 +212,41 @@ import { Proforma, Form, Field, Submit, Debug } from 'react-proforma';
 class DemoForm2 extends React.Component {
   renderForm() {
     return (
-      <div className="outer-wrapper">
-        <div className="form-wrapper">
-          <Form>
-            <div className="field-row">
-              <label htmlFor="name-field">Name:</label>
-              <Field
-                name="name"
-                type="text"
-                className="form-field"
-                id="name-field"
-                placeholder="E.g. Billy Bob"
-              />
-            </div>
-            <div className="field-row">
-              <label htmlFor="email-field">Email:</label>
-              <Field
-                name="email"
-                type="text"
-                className="form-field"
-                id="email-field"
-                placeholder="E.g. billy@bob.com"
-              />
-            </div>
-            <div className="field-row">
-              <label htmlFor="password-field">Password:</label>
-              <Field
-                name="password"
-                type="password"
-                className="form-field"
-                id="password-field"
-              />
-            </div>
-            <Submit className="submit-button" />
-          </Form>
-        </div>
+      <div className="outer-wrapper">        
+        {/* === FORM STARTS HERE === */}
+        <Form>
+          <div className="field-row">
+            <label htmlFor="name-field">Name:</label>
+            <Field
+              name="name"
+              type="text"
+              className="form-field"
+              id="name-field"
+              placeholder="E.g. Billy Bob"
+            />
+          </div>
+          <div className="field-row">
+            <label htmlFor="email-field">Email:</label>
+            <Field
+              name="email"
+              type="text"
+              className="form-field"
+              id="email-field"
+              placeholder="E.g. billy@bob.com"
+            />
+          </div>
+          <div className="field-row">
+            <label htmlFor="password-field">Password:</label>
+            <Field
+              name="password"
+              type="password"
+              className="form-field"
+              id="password-field"
+            />
+          </div>
+          <Submit className="submit-button" />
+        </Form>
+        {/* === FORM ENDS HERE === */}        
         <div className="debug-wrapper">
           {/* DEBUG COMPONENT */}
           <Debug />
@@ -292,6 +294,8 @@ The styling divs clutter things up a little, but I want you to just focus on the
   - Using these components, **you no longer have to wire up your form functionality manually** -- these components are all hooked up for you.
   - For `Field`, all you have to do is pass in a `name` (that corresponds with one of the keys on your `initialValues` object) and a `type` (defaults to "text") as props, along with whatever other props you'd want passed down to the input element that will be returned (e.g. id, className, style, placeholder, maxLength, etc.)
   - (Much more customization is possible with all components exported from React Proforma. [See the API](#api) for more information.
+
+[**See an example that shows each React Proforma component in action.**](/examples/all-react-proforma-components.jsx)
 
 Alright, so everything looks good, but we're going to need some **validation**.
 
@@ -450,7 +454,7 @@ Add the following property to your `validationObject`:
 password2: (values) => {
   return fieldValidator(values.password2)
     .required()
-    .custom(values, (values) => {
+    .custom(() => {
       if (values.password2 !== values.password) {
         return 'Your passwords must match exactly!';
       }
@@ -459,12 +463,22 @@ password2: (values) => {
 };
 ```
 
-Here we are making use of the `custom()` method chained to `fieldValidator()`. `custom()` takes two arguments:
+Here we are making use of the `custom()` method chained to `fieldValidator()`. `custom()` takes a function as it's sole argument, which will be executed by `custom()`. If your function returns a string value, that value will be added to the current error messages for that field.
 
-1. `values` - just passing in the values object from the outer function
-2. A function you create which accepts that same values object as a parameter, runs any checks you want, and then returns a string value (or undefined).
+But we can make things even more concise in this case, by making use of the `.equals()` method:
 
-And that's all it takes to perform cross-field validation. With `.custom()`, you can reference any value from any field name to perform your validation.
+```javascript
+password2: (values) => {
+  return fieldValidator(values.password2)
+    .required()
+    .equals(values.password, 'Your passwords must match exactly!')
+    .end();
+};
+```
+
+[(See the docs for all available chaining methods and their specific signatures.)](#fieldvalidator)
+
+And that's all it takes to perform cross-field validation with React Proforma.
 
 Here's what we've created so far:
 
@@ -525,6 +539,8 @@ And just like that we have:
 
 ![Demo Form 2d](demo/screenshots/demo-form-2-d.png 'Demo Form 2d')
 
+[**Check out the complete code for this form here.**](/examples/DemoForm2.jsx)
+
 ### Wrap-up
 
 There's a **lot** more built into React Proforma, including other pre-wired components ([`Select`](#select), [`Checkbox`](#checkbox), [`Radio`](#radio), [`Textarea`](#textarea)), and [`Reset`](#reset), [using custom components](#using-custom-componentsui-libs) (like from a UI library or created by a css-in-js library) instead of standard React elements, and giving you access to more of your form's functionality through the methods and properties inside the [`ProformaBundle`](#proformabundle).
@@ -535,13 +551,11 @@ There's a **lot** more built into React Proforma, including other pre-wired comp
 
 ## Typescript
 
-Here is where React Proforma really shines. This entire library was written in Typescript, so in addition to being fully typed, I also take full advantage of Typescript's other features wherever possible.
+This entire library was written in Typescript, so in addition to being fully typed, I also take full advantage of Typescript's other features wherever possible.
 
-[Check out this example](/examples/DemoForm2.tsx) for reference.
+Usage in Typescript is pretty much the same as it is in vanilla JS, with two notable exceptions:
 
-I'd like to point out a couple of things:
-
-1. The `Proforma` component is a generic class, so you just have to drop in the `type` that represents your form values, and `Proforma` propogates that around wherever possible:
+1. The `Proforma` component is a generic class, so you just have to pass in the `type` that represents your form values, and Proforma propogates that around wherever possible:
 
    ```typescript
    type FormValues = {
@@ -566,7 +580,7 @@ I'd like to point out a couple of things:
 
    **If you didn't know how to pass in a type variable to a component in JSX before, now you know!**
 
-2. In your `renderForm` method, in order to have your `proformaBundle` argument fully typed, you have to import `ProformaBundle`, which is a generic type that expects your `FormValues` again as a type variable. As in:
+2. In your `renderForm` method (or whatever function returns your form mark-up), in order to have your `proformaBundle` argument fully typed, you have to import `ProformaBundle`, which is a generic type that expects your `FormValues` again as a type variable. As in:
 
    ```typescript
    import { ProformaBundle } from 'react-proforma';
@@ -605,16 +619,64 @@ I'd like to point out a couple of things:
 
 ---
 
-## Going Further
+## Going further
 
 ### Using Custom Components/UI LIbs
 
-TODO
+Very often you will likely want to use custom components or UI library components instead of standard React form elements. React Proforma makes this very easy to use.
 
-### Using `customOnChange`
+Here's an example of how to integrate a css-in-js (e.g. styld-components) component, as well as a Material-UI component, into React Proforma:
 
-1. Using `customOnChange` and component state to perform special validation
-2. Using `customOnChange` to restrict user input
+   1. Import whatever you need from the respective libraries and React Proforma:
+
+```javascript
+import styled from 'styled-components';
+import { TextField } from '@material-ui/core';
+import { Field } from 'react-proforma';
+```
+
+  2. Create your styled-component:
+
+```javascript
+const StyledInput = styled.input`
+  color: blue;
+  font-size: 35px;
+  font-weight: 'bold';
+  padding: 8px;
+  margin-top: 5px;
+`;
+```
+
+  3. Pass these components into `Field` in the 'component' prop, and add whatever other props you would normally pass to that component:
+
+```javascript
+<Field 
+  name="email"
+  component={TextField}
+  type="text"
+  required
+  label="Email"
+  margin="normal"
+  style={{ marginTop: '0', width: '100%' }}
+/>
+
+<Field
+  name="password"
+  component={StyledInput}  
+  type="text"  
+  required
+  placeholder="Password field"  
+/>
+```
+
+[**You can see a complete example here.**](/examples/using-custom-components-ui-lib.jsx)
+
+### Using `Proforma.config.customOnChange`
+
+1. The `customOnChange`, along with you component state, can be used to fulfill special validation requirements.
+     - I created [this example](/examples/password-strength-validation-customOnChange.jsx) to show how using the 'customOnChange' object makes password-strength validation easy.
+2. You can use `customOnChange` to restrict user input by only allowing a specific kind of input in a field.
+      - I created [this example](/examples/restrict-user-input-customOnChange.jsx) to show how React Proforma makes that easy.
 
 TODO
 
@@ -626,13 +688,13 @@ TODO
 
 #### Proforma
 
-`Proforma` is a react component that you return from your own component. It expects as a single child a function that will return your actual form markup. The child function can be declared in-line as an anonymous function, but I recommend referencing a named function instead, for organization, clarity, and efficiency.
+`Proforma` is the core component of the React Proforma library. It is a React component that you return from your own component's render method (or returned from your functional component). It expects as a single child a function that will return your actual form markup. The child function can be declared in-line as an anonymous function, but I recommend referencing a named function instead, for organization, clarity, and efficiency.
 
 The child function will be executed by `Proforma` with the entire [ProformaBundle](#proformabundle), so you can access it (or any part of it) inside the child function that you pass in.
 
 For example:
 
-**NOTE: The child function does NOT HAVE PARENTHESES next to it. This is a function reference, not invocation.**
+**NOTE: The child function does NOT HAVE PARENTHESES next to it. This is a function reference, not a function invocation.**
 
 ```javascript
 import React from 'react';
@@ -676,8 +738,8 @@ class MyForm extends React.Component {
     - The 'initialValues' object is also where, as the name implies, you can set the initial value of any form field name. You can either set values to empty strings, a boolean value (for checkboxes), or grab values from your components props. For example:
     ```javascript
     initialvalues: {
-      name: this.props.userName,
-      email: this.props.userEmail,
+      name: this.props.userName || '',
+      email: this.props.userEmail || '',
       password: '',
       newsletter: true
     }
@@ -708,7 +770,7 @@ class MyForm extends React.Component {
     - Each property on the `customOnChange` object should be a name that corresponds with one of your form field names.
     - Each value on the `customOnChange` object should be a function that accepts two arguments:
       1. event: _React.ChangeEvent_ -- the change event emitted by React.
-      2. setValues: _function_ -- a function that allows you to set the value of one or more of your form fields. NOTE: Since all form fields inside `Proforma` are controlled, you will have to use `setValues` to update that particular form field yourself. For example:
+      2. setValues: _function_ -- a function that allows you to set the value of one or more of your form fields. **NOTE**: Since all form fields inside `Proforma` are controlled, **you will have to use `setValues` to update that particular form field yourself**. For example:
 
     ```javascript
     customOnChangeObject: {
@@ -735,14 +797,17 @@ class MyForm extends React.Component {
 
 - **Proforma.handleSubmit**
 
-  - This is the function that React Proforma executes when your form is submitted.
+  - This function will be executed by React Proforma when your form is submitted.
   - I call `event.preventDefault()` for you, so don't worry about including that in your own `handleSubmit`.
+  - I also put the execution of your `handleSubmit` function inside a conditional that prevents a user from submitting the form many times with multiple clicks.
+    - NOTE: If your `handleSubmit` function makes use of the 'setSubmitting' function (see below) to set the 'isSubmitting' property to false, and for some reason you've kept the form component on the screen, the user WILL be able to submit the form again unless you make use of the 'submitCount' property (see below) to control a user's ability to re-submit your form.
   - It can be async if you need use of `await` in your function logic.
-  - Your `handleSubmit` function will be executed with the following 4 arguments being made available to your function, in this order:
+  - Your `handleSubmit` function will be executed with the following 5 arguments being made available to your function, in this order:
     1. 'values': _object_ -- The 'values' object that represents all the current values of your form at the moment your form is submitted. You can, of course, access into the 'values' object with dot or bracket notation (i.e. values.email, or values['email']).
     2. 'setSubmitting': _function_ -- This is a method that allows you to flip the 'isSubmitting' property inside the [ProformaBundle](#proformabundle). 'isSubmitting' is set to `true` before your `handleSubmit` is executed, but if the submission fails (e.g. your server responded with an error), you can use this method like this: `setSubmitting(false)`. This is useful if you are referencing the `isSubmitting` property inside your form somewhere in a component that displays a different message depending on whether the form is currently submitting or not.
     3. 'setComplete': _function_ -- The same as 'setSubmitting' above, but for is `isComplete` property in the [ProformaBundle](#proformabundle). (NOTE: I do not do anything to `isComplete`, other than set it to an initial value of `false`.) This is useful if you decide you want to keep the form on the screen and just say something like 'Form has been successfully submitted!' rather than redirect the user to some other route. Use it like this: `setComplete(false)`.
-    4. 'event': _React.FormEvent | React.SyntheticEvent_ -- This is the actual event emitted by React when the form is submitted, should you need it for whatever reason. As mentioned above, I do the `event.preventDefault()` for you, so access the event object for anything other than that.
+    4. 'submitCount': _number_ -- A value representing the number of times your form has been submitted. Starts at zero, and increments by 1 on each call to `ProformaBundle.handleSubmit` from your form.
+    5. 'event': _React.FormEvent | React.SyntheticEvent_ -- This is the actual event emitted by React when the form is submitted, should you need it for whatever reason. As mentioned above, I do the `event.preventDefault()` for you, so access the event object for anything other than that.
   - Example handleSubmit function:
 
   ```javascript
@@ -817,7 +882,10 @@ Simply import `Form` from React Proforma:
 import { Form } from 'react-proforma';
 ```
 
-Any additional props passed to `Form` will be forwarded onto the resulting React `form` element.
+  - Form.component: _React.ComponentType_ (optional)
+    - A custom component you'd like to use instead of having a standard `form` element returned from `Form`. [See here](#using-custom-componentsui-libs) for how to use this. 
+  - Form...otherProps
+    - Any additional props passed to `Form` will be forwarded onto the resulting React `form` element.
 
 #### Field
 
@@ -870,6 +938,8 @@ Example:
 This component is for checkbox inputs. It comes automatically wired up as a controlled component.
 
 The `Checkbox` component **must** be passed a 'name' prop corresponding with one of the form field names in your 'initialValues' object in your Proforma.config. All other props will be forwarded to the resulting `input` element.
+
+**NOTE: The 'initialValue' for a Checkbox input must be a _BOOLEAN_ value, not a string.**
 
 Simply import `Checkbox` from React Proforma:
 
@@ -1064,36 +1134,211 @@ and insert it anywhere within your markup:
 ### ProformaBundle
 
 - **ProformaBundle.values**: _object_
-
-  - TODO
+  - An object whose keys are the form field names you passed in to Proforma in your 'initialValues' object, and whose values are the current field values for each field name.
 
 - **ProformaBundle.touched**: _object_
-
-  - TODO
+  - An object whose keys are the form field names you passed in to Proforma in your 'initialValues' object, and whose values are the current 'touched' state, represented by a boolean value, for each field name.
 
 - **ProformaBundle.errors**: _object_
+  - An object whose keys are the form field names you passed in to Proforma in your 'initialValues' object, and whose values are the current errors for that field, based on the current value in that field and the 'validationObject' you passed into Proforma.
+  - If there are errors, they will be present as an array of string.
+  - If there are no errors, the value of that field name's errors will be `null`.
 
-  - TODO
+- **ProformaBundle.isSubmitting**: _boolean_  
+  - A boolean flag representing whether or not the form is currently submitting.
+  - Useful for tailoring your UI text in order to inform that user of the form's current submission status.
+  - Controlled by `ProformaBundle.setSubmitting`.
+
+- **ProformaBundle.isComplete**: _boolean_  
+  - A boolean flag representing whether or not the form processing is complete.
+  - Starts off as `false`, and is only turned `true` by you with a call to `ProformaBundle.setComplete(true)`.
+  - There aren't too many cases where you will need this. The only thing I can think of is if you want to keep your form on the screen for some reason after the form has been processed, and you want to tell the user that the form has been successfully processed.
+
+- **ProformaBundle.submitCount**: _number_
+  - A value representing the number of times your form has been submitted. Starts at zero, and increments by 1 on each call to `ProformaBundle.handleSubmit` from your form.
+
+- **ProformaBundle.handleChange**: _function_
+  - This is Proforma's form input change handler.
+  - Use it to manually hook up a form field to the rest of Proforma's functionality.
+  - **NOTE**: The input you're attaching 'ProformaBundle.handleChange' to MUST have a 'name' prop passed to it that corresponds with one of your form field names.
+  - Only needed if you are not using any of Proforma's own custom components, or if you are facing some very special edge-case.
+
+- **ProformaBundle.handleFocus**: _function_
+  - This is Proforma's form input focus handler.
+  - Use it to manually hook up a form field to the rest of Proforma's functionality.
+  - **NOTE**: The input you're attaching 'ProformaBundle.handleFocus' to MUST have a 'name' prop passed to it that corresponds with one of your form field names.
+  - Only needed if you are not using any of Proforma's own custom components, or if you are facing some very special edge-case.
+
+- **ProformaBundle.handleBlur**: _function_
+  - This is Proforma's form input focus handler.
+  - Use it to manually hook up a form field to the rest of Proforma's functionality.
+  - **NOTE**: The input you're attaching 'ProformaBundle.handleBlur' to MUST have a 'name' prop passed to it that corresponds with one of your form field names.
+  - Only needed if you are not using any of Proforma's own custom components, or if you are facing some very special edge-case.
+
+- **ProformaBundle.handleSubmit**: _function_
+  - This is Proforma's form submission handler.
+  - Among other things, this is where Proforma executes _your_ 'handleSubmit' function that you passed to Proforma. 
+  - [See Proforma](#proforma) for more information about the 'handleSubmit' function that you pass to Proforma.
+
+- **ProformaBundle.handleReset**: _function_
+  - This is Proforma's form reset method.
+  - Invoking this method will reset all of your fields back to the initial values defined by your 'initialValues' object passed to the `Proforma` component, as well as resetting the properties on the 'errors' and 'touched' objects back to `null` and `false` respectively.
+  - Attach it to an element's `onClick` property, or [import the `Reset` component](#reset), which comes pre-wired up 'ProformaBundle.handleRest'.
+
+- **ProformaBundle.setSubmitting**: _function_
+  - Use this function to control the value of 'ProformaBundle.isSubmitting'. (See above).
+
+- **ProformaBundle.setComplete**: _function_
+  - Use this function to control the value of 'ProformaBundle.isComplete'. (See above).
 
 ### Helper functions
 
 #### fieldValidator
 
-- TODO
+  - A function that exposes an internal class that allows you to easily construct your collection of error messages for a given form field.
+  - Accepts a single argument: the value you wish to validate.
+    - I.e. values\.name, values.password, values.email, etc.
+  - Used inside your 'Proforma.config.validationObject'.
+  - **NOTE**: Remember to _return_ the `fieldValidator` chain from the validation function.
+  - **NOTE**: Remember to add `.end()` to the end of your chain!
+  - Each chained method accepts an **optional argument** where you can customize the error message for that part of the validation. See the list of available methods below for their exact function signatures.
+  - Imported from React Proforma:
+
+```javascript
+import { fieldValidator } from 'react-proforma';
+```
+  - Example usage:
+
+```javascript
+validationObject: {
+  userName: (values) => {
+    return fieldValidator(values.userName)
+      .required()
+      .min(6)
+      .max(20)
+      .end();
+  },
+  email: (values) => {
+    return fieldValidator(values.email)
+      .required()
+      .email()
+      .end();
+  }
+}
+```
+
+  - List of methods available for chaining to `fieldValidator(value)`:
+    - `required(msg?: string)`
+      - Requires that this field must be be filled in.
+      - Default message: 'This field is required.'
+    - `min(length: number, msg?: string)`
+      - Sets a minimum number of characters for that field.
+      - Default message: 'This field must be at least [length] character(s) long.'
+    - `max(length: number, msg?: string)`
+      - Sets a maximum number of characters for that field.
+      - Default message: 'This field must not be more than [length] character(s) long.'
+    - `integer(msg?: string)`
+      - Requires that this field's value must be an integer.
+      - Default message: 'The value entered must be an integer.'
+    - `float(msg?: string)`
+      - Requires that this field's value must be a floating point value.
+      - Default message: 'The value entered must be a floating point number.'
+    - `email(msg?: string, rgx?: RegExp)`
+      - Requires that this field must be a valid email address.
+      - Default message: 'Please enter a valid email address.'
+      - Default regex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    - `regex(rgx: RegExp, msg? string)`
+      - Accepts a regular expression against which to test the value.
+      - Default message: 'The value entered does not match the required regular expression pattern.'
+    - `equals(comparedString: string, msg?: string)`
+      - Accepts a string value against which the field value is to be compared.
+      - Default message: 'The value in this field does not equal "[comparedString]".'
+    - `custom(fn: () => string | undefined)`
+      - Accepts a single function that should return a string value or undefined. If a string value is returned, it will be added to the current collection of error messages.
+      - There is no default message, as your desired error message is to be returned from your passed-in function.
+    - `end()`
+      - **YOU MUST ADD `.end()` TO THE END OF ANY CHAIN** of methods attached to `fieldValidator` in order for the chain to return the collection of error messages.
+      - This will always be the last method in your method chain.
 
 #### fieldError
 
-- TODO
+  - This is a function that you can insert anywhere into your form mark-up (under each form field for example) that will help you display the error messages for a specific field.
+  - Expects two arguments:
+    1. name: _string_ (required) -- the 'name' of the form field whose errors you wish to display (i.e. a name corresponding with one of the properties on your 'initialValues' object).
+    2. component: _React.ComponentType_ (required) -- the component of your own design that will be passed each individual error message as its only prop called "error".
+  - Import it from React Proforma:
+
+```javascript
+import { fieldError } from 'react-proforma';
+```
+
+  - Example usage:
+
+```javascript
+/* example error display component */
+function FieldError(props) {
+  return <p style={{ color: 'red' }}>{props.error}</p>;
+}
+
+/* then insert the fieldError call somewhere in your mark-up */
+<div className="field-row">
+  <label htmlFor="password-field">Enter password:</label>
+  <Field name="password" type="password" id="password-field"/>
+</div>
+{fieldError('password', FieldError)}
+```
 
 #### fieldValid
 
-- TODO
+  - This is a function similar to 'fieldError', except that it is meant to display a message to the user if a field's value is valid.
+  - Expects three arguments:
+    1. name: _string_ (required) -- the 'name' of the form field whose errors you wish to display (i.e. a name corresponding with one of the properties on your 'initialValues' object).
+    2. component: _React.ComponentType_ (required) -- the component of your own design that will be passed each individual error message as its only prop called "message".
+    3. message: _string_ (required) -- the message you wish to display (e.g. 'Good!').
+  - Import it from React Proforma:
+
+```javascript
+import { fieldValid } from 'react-proforma';
+```
+  
+  - Example usage:
+
+```javascript
+/* example valid-input display component */
+function FieldValid(props) {
+  return <p style={{ color: 'green' }}>{props.error}</p>;
+}
+
+/* then insert the fieldValid call somewhere in your mark-up */
+<div className="field-row">
+  <label htmlFor="password-field">Enter password:</label>
+  <Field name="password" type="password" id="password-field"/>
+</div>
+{fieldValid('password', FieldValid, 'Good stuff!')}
+```
+
+**NOTE: 'fieldError' and 'fieldValid' can be used in conjunction with each other. Just place them one above the other, and either error messages or the valid input message will be displayed, depending on the current input in that field:**
+
+```javascript
+{fieldError('password', FieldError)}
+{fieldValid('password', FieldValid, 'Good stuff!')}
+```
 
 ---
 
 ## Running tests
 
-TODO
+  1. Clone the Github repo:
+  
+      `git clone https://github.com/varunj166/react-proforma.git`
+  
+  2. Install dependencies
+
+      `npm install`
+  
+  3. Run test suites
+
+      `npm test`
 
 ---
 

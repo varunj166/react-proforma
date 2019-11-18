@@ -8,6 +8,8 @@ class FieldValidator {
   }
 
   min(length: number, msg?: string) {
+    if (!length || isNaN(length))
+      throw new Error('".min()" method: Missing or invalid arguments.');
     if (length >= 1) {
       const _msg =
         msg ||
@@ -20,6 +22,8 @@ class FieldValidator {
   }
 
   max(length: number, msg?: string) {
+    if (!length || isNaN(length))
+      throw new Error('".max()" method: Missing or invalid arguments.');
     if (length >= 1) {
       const _msg =
         msg ||
@@ -63,6 +67,8 @@ class FieldValidator {
   }
 
   regex(rgx: RegExp, msg?: string) {
+    if (!rgx || !rgx.test)
+      throw new Error('".regex()" method: Missing or invalid arguments.');
     const _msg =
       msg ||
       'The value entered does not match the required regular expression pattern.';
@@ -71,14 +77,18 @@ class FieldValidator {
   }
 
   equals(comparedString: string, msg?: string) {
+    if (!comparedString || !(typeof comparedString === 'string'))
+      throw new Error('".equals()" method: Missing or invalid arguments.');
     const _msg =
       msg || `The value in this field does not equal "${comparedString}".`;
     if (this._value !== comparedString) this._push(_msg);
     return this;
   }
 
-  custom<V = any>(values: V, fn: (values: V) => string | undefined) {
-    const returnedError = fn(values);
+  custom(fn: () => string | undefined) {
+    if (!fn || !(typeof fn === 'function'))
+      throw new Error('".custom()" method: Missing or invalid arguments.');
+    const returnedError = fn();
     if (typeof returnedError === 'string') this._push(returnedError);
     return this;
   }
