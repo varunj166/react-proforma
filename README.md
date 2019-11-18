@@ -14,7 +14,7 @@
 
 # React Proforma <!-- omit in toc -->
 
-### Build simple to complex forms with ease in React for the web. <!-- omit in toc -->
+### Build simple to complex web forms with ease in React. <!-- omit in toc -->
 
 Easily manage multiple form fields, validation, focus handling, and form submission. Use custom components (styled with css-in-js or from a UI library) or standard react elements anywhere you like. React Proforma is a complete form-solution that has been performance-optimized, is fully documented, and will make building your next React web form a breeze!
 
@@ -132,9 +132,9 @@ class DemoForm1 extends React.Component {
 }
 ```
 
-- `Proforma.config` accepts an object (note the double curly braces) with one required property (`initialValues`) and a few optional properties (we'll learn more about those later).
+- `Proforma.config` accepts an object (note the double curly braces) with one required property (`initialValues`) and a few optional properties [(we'll learn more about those later)](#proforma).
   - `initialValues` is a required property, whose value must be an object, whose properties must correspond with the names of your form fields (i.e. name, email, password, etc.), and whose values are the initial value you'd like to set for each respective form field.
-  - In this example, I have a single field name ('field1' here), and I've set it to have an initial value of `''` (empty string).
+  - In this example, I have a single field name ('field1'), and I've set it to have an initial value of `''` (empty string).
   - Please note that form field values in React and HTML can only be boolean (for checkboxes) or strings. So if you pass in any other type of value to `initialValues`, it will be ignored, and empty string `''` will be used.
 - `Proforma.handleSubmit` is any function you want to have executed when the form is submitted. [See the api](#proforma) for details, including what arguments are passed to your `handleSubmit` function on execution.
 - There will be nothing on your screen because `renderForm` isn't returning anything. Let's fix that next.
@@ -292,7 +292,7 @@ With some styling divs here and there, this code produces the following form:
 
 ![Demo Form 2a](demo/screenshots/demo-form-2-a.png 'Demo Form 2a')
 
-**NOTE: That window you see on the right is a `Debug` component I made in case you ever want to see the current internal Proforma state. Just `import { Debug } from 'react-proforma'` and insert the component anywhere.**
+**NOTE: [That window you see on the right](#debug) is a `Debug` component I made in case you ever want to see the current internal Proforma state. Just `import { Debug } from 'react-proforma'` and insert the component anywhere.**
 
 The styling divs clutter things up a little, but I want you to just focus on the props passed to the `Proforma` component, as well as the `Form` element inside the `renderForm` method.
 
@@ -303,7 +303,7 @@ The styling divs clutter things up a little, but I want you to just focus on the
   - Here is our first exposure to the [`Form`](#form), [`Field`](#field), and [`Submit`](#submit) components imported from React Proforma.
   - Using these components, **you no longer have to wire up your form functionality manually** -- these components are all hooked up for you.
   - For `Field`, all you have to do is pass in a `name` (that corresponds with one of the keys on your `initialValues` object) and a `type` (defaults to "text") as props, along with whatever other props you'd want passed down to the input element that will be returned (e.g. id, className, style, placeholder, maxLength, etc.)
-  - (Much more customization is possible with all components exported from React Proforma. [See the API](#api) for more information.
+  - (Much more customization is possible with all components exported from React Proforma. [See the API](#api) for more information.)
 
 [**See an example that shows each React Proforma component in action.**](/examples/all-react-proforma-components.jsx)
 
@@ -359,7 +359,7 @@ So what's going on here.
 - If either of these produce an error, an error message is pushed into the errors array.
 - Finally, if there are any errors in the errors array, the errors array is returned. Otherwise, `null` is returned.
 
-So, obviously this is a lot of typing. This is why I created a field validation helper called `fieldValidator`. Simpy `import { fieldValidator } from 'react-proforma'`, and use it to produce the same result as above:
+So, obviously this is a lot of typing. This is why I created a field validation helper called `fieldValidator`. Simpy import it: `import { fieldValidator } from 'react-proforma'`, and use it to produce the same logic as above:
 
 ```javascript
 validationObject: {
@@ -377,7 +377,7 @@ validationObject: {
 - All validator methods have default error messages, but you can optionally use your own, as I did here with the `regex()` call.
 - [See the `fieldValidator` docs](#fieldValidator) for all of the methods available to you.
 
-**NOTE: You must add `.end()` to the end of the `fieldValidator` chain, and return the entire chain from the function! (I.e. `return fieldValidator(values.name) ..... .end()`)**
+**NOTE: You must add `.end()` to the end of the `fieldValidator` chain, and you must return the entire chain from the function! (I.e. `return fieldValidator(values.name) ..... .end()`)**
 
 With this new tool, let's go ahead and add email and password validation in just a few seconds:
 
@@ -524,7 +524,7 @@ Use it like this:
 3. Under each field row, add the following:
 
    ```javascript
-   { fieldError('<FIELD NAME>', FieldError) }
+   {fieldError('<FIELD NAME>', FieldError)}
    ```
 
    As in:
@@ -610,7 +610,7 @@ Usage in Typescript is pretty much the same as it is in vanilla JS, with two not
    }
    ```
 
-   Or with in-line destructing:
+   Or with in-line destructuring:
 
    ```typescript
    renderForm({
@@ -618,7 +618,7 @@ Usage in Typescript is pretty much the same as it is in vanilla JS, with two not
      errors,
      touched,
      handleSubmit,
-     handleRest,
+     handleReset,
      /* whatever else you need from ProformaBundle */
    }: ProformaBundle<FormValues>) {
      return (
@@ -635,7 +635,7 @@ Usage in Typescript is pretty much the same as it is in vanilla JS, with two not
 
 Very often you will likely want to use custom components or UI library components instead of standard React form elements. React Proforma makes this very easy to use.
 
-Here's an example of how to integrate a css-in-js (e.g. styld-components) component, as well as a Material-UI component, into React Proforma:
+Here's an example of how to integrate a css-in-js (e.g. styled-components) component, as well as a Material-UI component, into React Proforma:
 
    1. Import whatever you need from the respective libraries and React Proforma:
 
@@ -803,7 +803,7 @@ class MyForm extends React.Component {
     - Defaults to `false`.
   - Proforma.config.validateOnChange: _boolean_
     - A simple boolean flag that, if false, will not run validation as the user types (changes) form values. This means validation will only be run when a field recieves and then loses focus.
-    - Defaults to `true`;
+    - Defaults to `true`.
 
 - **Proforma.handleSubmit**
 
@@ -848,7 +848,7 @@ class MyForm extends React.Component {
 
 #### Form
 
-The Form component comes automatically wired up with Proforma's 'handleSubmit' functinon that you would normally have to wire up yourself by grabbing it from the [PorformaBundle](#proformabundle).
+The Form component comes automatically wired up with Proforma's 'handleSubmit' function that you would normally have to wire up yourself by grabbing it from the [PorformaBundle](#proformabundle).
 
 That is, this:
 
@@ -1237,7 +1237,7 @@ validationObject: {
 }
 ```
 
-  - List of methods available for chaining to `fieldValidator(value)`:
+  - List of methods available for chaining on to `fieldValidator(value)`:
     - `required(msg?: string)`
       - Requires that this field must be be filled in.
       - Default message: 'This field is required.'
@@ -1364,7 +1364,7 @@ For now, React Proforma is strictly for React web forms.
 
 ## What About Formik?
 
-I am of course aware of Formik, seeing as it's the most popular React form helper library out there. And I did work with Formik a bit, but there were design choices that annoyed me, and for something as frequently needed as a form helper library, I didn't want to have to conform to someone else's designs.
+I am, of course, aware of Formik, seeing as it's the most popular React form helper library out there. And I did work with Formik a bit, but there were design choices there that annoyed me, and for something as frequently needed as a form helper library, I didn't want to have to conform to designs that I didn't agree with.
 
 That's what inspired me to build React Proforma. Everything about it is exactly how I would have wanted someone else's form helper library to be. And since that wasn't out there, I made it myself.
 

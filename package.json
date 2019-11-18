@@ -1,7 +1,7 @@
 {
   "name": "react-proforma",
   "version": "1.0.0",
-  "description": "React Proforma helps you build simple to complex forms with ease in React for the web. -- Simplicity where you want it. Flexibility where you need it.",
+  "description": "React Proforma helps you build simple to complex web forms with ease in React. -- Simplicity where you want it. Flexibility where you need it.",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc -p ./tsconfig.notests.json",
