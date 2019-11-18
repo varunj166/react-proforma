@@ -1,14 +1,19 @@
+<div align="center">
+
 ![Banner](images/banner.png 'Banner')
 
-[![Node version](https://img.shields.io/node/v/react-proforma.svg?style=flat)](http://nodejs.org/download/)
+**Simplicity where you want it. Flexibility where you need it.**
+<br />
 
-[![Build Status](https://travis-ci.com/varunj166/react-proforma.svg?token=m9qxsZfEVyKc59yMy5oz&branch=master&style=flat)](https://travis-ci.com/varunj166/react-proforma)
+[![Node version](https://img.shields.io/node/v/react-proforma.svg?style=flat)](http://nodejs.org/download/)
+[![Build Status](https://travis-ci.com/varunj166/react-proforma.svg?token=m9qxsZfEVyKc59yMy5oz&branch=master)](https://travis-ci.com/varunj166/react-proforma)
+<br />
+
+</div>
 
 # React Proforma <!-- omit in toc -->
 
-### React Proforma helps you build simple to complex forms with ease in React for the web. <!-- omit in toc -->
-
-**Simplicity where you want it. Flexibility where you need it.**
+### Build simple to complex forms with ease in React for the web. <!-- omit in toc -->
 
 Easily manage multiple form fields, validation, focus handling, and form submission. Use custom components (styled with css-in-js or from a UI library) or standard react elements anywhere you like. React Proforma is a complete form-solution that has been performance-optimized, and will make building your next React web form a breeze!
 
