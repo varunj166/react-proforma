@@ -2,9 +2,7 @@
 
 [![Node version](https://img.shields.io/node/v/react-proforma.svg?style=flat)](http://nodejs.org/download/)
 
-[![Build Status](https://travis-ci.com/varunj166/react-proforma.svg?branch=master?style=flat)](https://travis-ci.org/varunj166/react-proforma)
-
-
+[![Build Status](https://travis-ci.com/varunj166/react-proforma.svg?token=m9qxsZfEVyKc59yMy5oz&branch=master&style=flat)](https://travis-ci.com/varunj166/react-proforma)
 
 # React Proforma <!-- omit in toc -->
 
