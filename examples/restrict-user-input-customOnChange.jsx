@@ -32,7 +32,7 @@ class RestrictUserInput extends React.Component {
                 if (isNaN(pValue)) return;
               }
 
-              /* The value passes the isNan test, so update view */
+              /* The value passes the isNaN test, so update view */
               setValues({ amount: value });
             }
           }
