@@ -214,7 +214,7 @@ At this point, we have a fully functioning form. The input is completely control
 
 ## Normal Usage
 
-Now that you've seen the nuts and bolts, let's clean it up and create a more complete example, with multiple fields (and types of fields), validation, and custom components.
+Now that you've seen the nuts and bolts, let's clean it up and create a more complete example, with multiple fields and validation.
 
 ### Form Mark-Up
 
