@@ -22,7 +22,7 @@ export type MemoComparePropsType<T> = Readonly<
 type ValidationFunctionType<V> = <T extends keyof V>(
   value: T
 ) => string[] | null;
-type SetValuesType = (setToObj: IndexableObjectType) => void;
+export type SetValuesType = (setToObj: IndexableObjectType) => void;
 
 export interface IValidationObject<V> {
   [key: string]: (values: V) => string[] | null;

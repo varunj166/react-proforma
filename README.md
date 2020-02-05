@@ -26,6 +26,7 @@ Easily manage multiple form fields, validation, focus handling, and form submiss
 
 ## Table of Contents <!-- omit in toc -->
 
+- [Version 2.0.0 - BREAKING CHANGES](#version-200---breaking-changes)
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
   - [Step 1: Build the scaffolding:](#step-1-build-the-scaffolding)
@@ -63,6 +64,9 @@ Easily manage multiple form fields, validation, focus handling, and form submiss
 - [What About Formik?](#what-about-formik)
 
 ---
+
+## Version 2.0.0 - BREAKING CHANGES
+- In the 'Proforma.handleSubmit' prop, React Proforma will now invoke your function with a different configuration of arguments to give your form submission handler function greater flexibility and access to more functionality. [See the `Proforma` component API for details](#proforma).
 
 ## Installation
 
@@ -376,7 +380,7 @@ validationObject: {
       .required()
       .regex(/^[a-zA-Z\s]*$/, 'Your name can only contain letters and spaces.')
       .end();
-  };
+  }
 }
 ```
 
@@ -820,18 +824,15 @@ class MyForm extends React.Component {
   - I also put the execution of your `handleSubmit` function inside a conditional that prevents a user from submitting the form many times with multiple clicks.
     - NOTE: If your `handleSubmit` function makes use of the 'setSubmitting' function (see below) to set the 'isSubmitting' property to false, and for some reason you've kept the form component on the screen, the user WILL be able to submit the form again unless you make use of the 'submitCount' property (see below) to control a user's ability to re-submit your form.
   - It can be async if you need use of `await` in your function logic.
-  - Your `handleSubmit` function will be executed with the following 5 arguments being made available to your function, in this order:
+  - Your `handleSubmit` function will be executed with the following arguments being made available to your function:
     1. 'values': _object_ -- The 'values' object that represents all the current values of your form at the moment your form is submitted. You can, of course, access into the 'values' object with dot or bracket notation (i.e. values.email, or values['email']).
-    2. 'setSubmitting': _function_ -- This is a method that allows you to flip the 'isSubmitting' property inside the [ProformaBundle](#proformabundle). 'isSubmitting' is set to `true` before your `handleSubmit` is executed, but if the submission fails (e.g. your server responded with an error), you can use this method like this: `setSubmitting(false)`. This is useful if you are referencing the `isSubmitting` property inside your form somewhere in a component that displays a different message depending on whether the form is currently submitting or not.
-    3. 'setComplete': _function_ -- The same as 'setSubmitting' above, but for the `isComplete` property in the [ProformaBundle](#proformabundle). (NOTE: I do not do anything to `isComplete`, other than set it to an initial value of `false`.) This is useful if you decide you want to keep the form on the screen and just say something like 'Form has been successfully submitted!' rather than redirect the user to some other route. Use it like this: `setComplete(false)`.
-    4. 'submitCount': _number_ -- A value representing the number of times your form has been submitted. Starts at zero, and increments by 1 on each call to `ProformaBundle.handleSubmit` from your form.
-    5. 'event': _React.FormEvent | React.SyntheticEvent_ -- This is the actual event emitted by React when the form is submitted, should you need it for whatever reason. As mentioned above, I do the `event.preventDefault()` for you, so access the event object for anything other than that.
+    2. HandleSubmitBundle: _object_ -- This is an object that contains a subset of the methods and properties that are available in the [ProformaBundle](#proformabundle) object. They are: `setSubmitting`, `setValues`, `setComplete`, `resetFields` (this is `handleReset` in the [ProformaBundle](#proformabundle)), and `submitCount`. In addition to these methods/properties, you can also find the 'event' object (_React.FormEvent | React.SyntheticEvent_) emitted by React when the form is submitted, should you need it. Note that I do the `event.preventDefault()` for you, so access the event object for anything other than that.   
   - Example handleSubmit function:
 
   ```javascript
   <Proforma
     config={{...}}
-    handleSubmit={async (values, setSubmitting) => {
+    handleSubmit={async (values, {setSubmitting}) => {
       /* Post values to server */
       try {
         const response = await axios.post(serverUrl, values);

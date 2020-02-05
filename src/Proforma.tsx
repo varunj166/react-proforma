@@ -1,17 +1,25 @@
 import React from 'react';
-import { IndexableObjectType, IConfigObject, ProformaBundle } from './types';
+import {
+  IndexableObjectType,
+  IConfigObject,
+  ProformaBundle,
+  SetValuesType
+} from './types';
 import { generateStateObject, validator } from './helpers';
 import { ProformaContextProvider } from './ProformaContext';
 
+type HandleSubmitBag = {
+  setSubmitting: (setTo: boolean) => any;
+  setComplete: (setTo: boolean) => any;
+  setValues: SetValuesType;
+  resetFields: (event: React.SyntheticEvent<HTMLElement>) => void;
+  submitCount: number;
+  event: React.FormEvent<HTMLFormElement> | React.SyntheticEvent<HTMLElement>;
+};
+
 interface IProps<V> {
   config: IConfigObject<V>;
-  handleSubmit: (
-    values: V,
-    setSubmitting: (setTo: boolean) => any,
-    setComplete: (setTo: boolean) => any,
-    submtiCount: number,
-    event: React.FormEvent<HTMLFormElement> | React.SyntheticEvent<HTMLElement>
-  ) => any;
+  handleSubmit: (values: V, handleSubmitBag: HandleSubmitBag) => any;
 }
 
 export type ProformaStateType<V> = Pick<
@@ -262,13 +270,14 @@ export class Proforma<V> extends React.PureComponent<
         }),
         () => {
           if (this.props.handleSubmit) {
-            this.props.handleSubmit(
-              this.state.values,
-              this.setSubmitting,
-              this.setComplete,
-              this.state.submitCount,
-              event
-            );
+            this.props.handleSubmit(this.state.values, {
+              setSubmitting: this.setSubmitting,
+              setComplete: this.setComplete,
+              setValues: this.setValues,
+              resetFields: this.handleReset,
+              submitCount: this.state.submitCount,
+              event: event
+            });
           }
         }
       );
