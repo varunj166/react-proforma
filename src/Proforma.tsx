@@ -8,18 +8,18 @@ import {
 import { generateStateObject, validator } from './helpers';
 import { ProformaContextProvider } from './ProformaContext';
 
-type HandleSubmitBag = {
+type HandleSubmitBundle = {
   setSubmitting: (setTo: boolean) => any;
   setComplete: (setTo: boolean) => any;
   setValues: SetValuesType;
-  resetFields: (event: React.SyntheticEvent<HTMLElement>) => void;
+  resetFields: () => void;
   submitCount: number;
   event: React.FormEvent<HTMLFormElement> | React.SyntheticEvent<HTMLElement>;
 };
 
 interface IProps<V> {
   config: IConfigObject<V>;
-  handleSubmit: (values: V, handleSubmitBag: HandleSubmitBag) => any;
+  handleSubmit: (values: V, handleSubmitBag: HandleSubmitBundle) => any;
 }
 
 export type ProformaStateType<V> = Pick<
@@ -274,7 +274,7 @@ export class Proforma<V> extends React.PureComponent<
               setSubmitting: this.setSubmitting,
               setComplete: this.setComplete,
               setValues: this.setValues,
-              resetFields: this.handleReset,
+              resetFields: this.resetFields,
               submitCount: this.state.submitCount,
               event: event
             });
@@ -292,6 +292,12 @@ export class Proforma<V> extends React.PureComponent<
       ...generateStateObject<V>(this.props.config.initialValues)
     });
     // }
+  }
+
+  resetFields() {
+    this.setState({
+      ...generateStateObject<V>(this.props.config.initialValues)
+    });
   }
 
   computeProformaBundle() {
