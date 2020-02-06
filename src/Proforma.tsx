@@ -92,6 +92,7 @@ export class Proforma<V> extends React.PureComponent<
     this.setComplete = this.setComplete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.resetFields = this.resetFields.bind(this);
     this.computeProformaBundle = this.computeProformaBundle.bind(this);
 
     this.proformaBundle = {
