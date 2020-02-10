@@ -115,7 +115,8 @@ const MemoComponentSelect = React.memo<ISelectProps & IndexableObjectType>(
  * @returns {JSX.Element} JSX.Element
  */
 export const Select: React.FunctionComponent<ISelectProps &
-  IndexableObjectType> = (props) => {
+  IndexableObjectType &
+  React.ComponentProps<'select'>> = (props) => {
   const {
     values,
     handleChange: _rPHandleChange,

@@ -114,7 +114,8 @@ const MemoComponentCheckbox = React.memo<ICheckboxProps & IndexableObjectType>(
  * @returns {JSX.Element} JSX.Element
  */
 export const Checkbox: React.FunctionComponent<ICheckboxProps &
-  IndexableObjectType> = (props) => {
+  IndexableObjectType &
+  React.ComponentProps<'input'>> = (props) => {
   const {
     values,
     handleChange: _rPHandleChange,

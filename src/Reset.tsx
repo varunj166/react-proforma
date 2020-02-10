@@ -105,7 +105,8 @@ const MemoComponentResetButton = React.memo<
  * @returns {JSX.Element} JSX.Element
  */
 export const Reset: React.FunctionComponent<IResetProps &
-  IndexableObjectType> = (props) => {
+  IndexableObjectType &
+  React.ComponentProps<'input'>> = (props) => {
   // console.log('Button component re-rendering.');
   const { handleReset: _rPHandleReset } = React.useContext<ProformaBundle<any>>(
     ProformaContext

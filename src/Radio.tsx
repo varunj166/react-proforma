@@ -122,7 +122,8 @@ const MemoComponentRadio = React.memo<IRadioProps & IndexableObjectType>(
  * @returns {JSX.Element} JSX.Element
  */
 export const Radio: React.FunctionComponent<IRadioProps &
-  IndexableObjectType> = (props) => {
+  IndexableObjectType &
+  React.ComponentProps<'input'>> = (props) => {
   const {
     values: _rPValues,
     handleChange: _rPHandleChange,

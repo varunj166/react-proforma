@@ -111,7 +111,8 @@ const MemoComponentTextarea = React.memo<ITextareaProps & IndexableObjectType>(
  * @returns {JSX.Element} JSX.Element
  */
 export const Textarea: React.FunctionComponent<ITextareaProps &
-  IndexableObjectType> = (props) => {
+  IndexableObjectType &
+  React.ComponentProps<'textarea'>> = (props) => {
   const {
     values,
     handleChange: _rPHandleChange,

@@ -121,7 +121,8 @@ const MemoComponentField = React.memo<IFieldProps & IndexableObjectType>(
  * @returns {JSX.Element} JSX.Element
  */
 export const Field: React.FunctionComponent<IFieldProps &
-  IndexableObjectType> = (props) => {
+  IndexableObjectType &
+  React.ComponentProps<'input'>> = (props) => {
   const {
     values,
     handleChange: _rPHandleChange,

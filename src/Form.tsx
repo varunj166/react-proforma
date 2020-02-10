@@ -19,9 +19,9 @@ interface IFormProps {
  * @param {string=} [method] - Method to be passed to form element
  * @returns {JSX.Element | null} - JSX.Element or null (null if no children are provided)
  */
-export const Form: React.FunctionComponent<IFormProps & IndexableObjectType> = (
-  props
-) => {
+export const Form: React.FunctionComponent<IFormProps &
+  IndexableObjectType &
+  React.ComponentProps<'form'>> = (props) => {
   const { handleSubmit } = React.useContext<ProformaBundle<any>>(
     ProformaContext
   );

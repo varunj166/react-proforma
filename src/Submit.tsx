@@ -133,7 +133,8 @@ const MemoComponentSubmitButton = React.memo<
  * @returns {JSX.Element} JSX.Element
  */
 export const Submit: React.FunctionComponent<ISubmitProps &
-  IndexableObjectType> = (props) => {
+  IndexableObjectType &
+  React.ComponentProps<'button'>> = (props) => {
   // console.log('Button component re-rendering.');
   const {
     isSubmitting: _rPIsSubmitting,
