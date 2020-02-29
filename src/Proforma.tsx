@@ -20,6 +20,7 @@ type HandleSubmitBundle = {
 interface IProps<V> {
   config: IConfigObject<V>;
   handleSubmit: (values: V, handleSubmitBag: HandleSubmitBundle) => any;
+  children: (proformaBundle: ProformaBundle<V>) => JSX.Element;
 }
 
 export type ProformaStateType<V> = Pick<

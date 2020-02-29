@@ -37,6 +37,7 @@ const _Field: React.FunctionComponent<IFieldProps & IndexableObjectType> = (
     handleChange,
     handleFocus,
     handleBlur,
+    parentRef,
     ...otherProps
   } = props;
 
@@ -44,6 +45,7 @@ const _Field: React.FunctionComponent<IFieldProps & IndexableObjectType> = (
     <input
       name={name}
       value={value}
+      ref={parentRef}
       type={type}
       onChange={handleChange}
       onFocus={handleFocus}
@@ -70,6 +72,7 @@ const _ComponentField: React.FunctionComponent<IFieldProps &
     handleFocus,
     handleBlur,
     children,
+    parentRef,
     ...otherProps
   } = props;
 
@@ -79,6 +82,7 @@ const _ComponentField: React.FunctionComponent<IFieldProps &
         <Component
           name={name}
           value={value}
+          ref={parentRef}
           type={type}
           onChange={handleChange}
           onFocus={handleFocus}
@@ -91,6 +95,7 @@ const _ComponentField: React.FunctionComponent<IFieldProps &
         <Component
           name={name}
           value={value}
+          ref={parentRef}
           type={type}
           onChange={handleChange}
           onFocus={handleFocus}
@@ -120,9 +125,10 @@ const MemoComponentField = React.memo<IFieldProps & IndexableObjectType>(
  * @param {React.ComponentType=} [component] - Optional custom component to be used instead of a standard textarea tag.
  * @returns {JSX.Element} JSX.Element
  */
-export const Field: React.FunctionComponent<IFieldProps &
-  IndexableObjectType &
-  React.ComponentProps<'input'>> = (props) => {
+export const Field = React.forwardRef<
+  HTMLElement & HTMLInputElement,
+  IFieldProps & IndexableObjectType & React.ComponentProps<'input'>
+>((props, ref) => {
   const {
     values,
     handleChange: _rPHandleChange,
@@ -170,6 +176,7 @@ export const Field: React.FunctionComponent<IFieldProps &
         name={name}
         type={type || 'text'}
         value={values[name]}
+        parentRef={ref}
         handleChange={_rPHandleChange}
         handleFocus={_rPHandleFocus}
         handleBlur={_rPHandleBlur}
@@ -184,6 +191,7 @@ export const Field: React.FunctionComponent<IFieldProps &
           name={name}
           type={type || 'text'}
           value={customValue || values[name]}
+          parentRef={ref}
           handleChange={customOnChange || _rPHandleChange}
           handleFocus={_rPHandleFocus}
           handleBlur={_rPHandleBlur}
@@ -197,6 +205,7 @@ export const Field: React.FunctionComponent<IFieldProps &
           name={name}
           type={type || 'text'}
           value={customValue || values[name]}
+          parentRef={ref}
           handleChange={customOnChange || _rPHandleChange}
           handleFocus={_rPHandleFocus}
           handleBlur={_rPHandleBlur}
@@ -207,4 +216,4 @@ export const Field: React.FunctionComponent<IFieldProps &
       );
     }
   }
-};
+});
