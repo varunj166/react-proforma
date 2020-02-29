@@ -35,10 +35,15 @@ interface ICustomOnChangeObject {
   ) => void;
 }
 
+interface IOnValidateCallbacksObject {
+  [key: string]: () => void;
+}
+
 export interface IConfigObject<V> {
   initialValues: V;
   validationObject?: IValidationObject<V>;
   customOnChangeObject?: ICustomOnChangeObject;
+  onValidateCallbacksObject?: IOnValidateCallbacksObject;
   resetTouchedOnFocus?: boolean;
   validateOnChange?: boolean;
 }

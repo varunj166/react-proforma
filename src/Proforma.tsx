@@ -120,12 +120,21 @@ export class Proforma<V> extends React.PureComponent<
   validateField(name: string) {
     const { validationObject } = this.props.config;
     if (validationObject && validationObject[name]) {
-      this.setState((prevState) => ({
-        errors: {
-          ...prevState.errors,
-          [name]: validator<V>(name, prevState.values, validationObject)
+      this.setState(
+        (prevState) => ({
+          errors: {
+            ...prevState.errors,
+            [name]: validator<V>(name, prevState.values, validationObject)
+          }
+        }),
+        () => {
+          const { onValidateCallbacksObject } = this.props.config;
+
+          if (onValidateCallbacksObject && onValidateCallbacksObject[name]) {
+            onValidateCallbacksObject[name]();
+          }
         }
-      }));
+      );
     }
   }
 
