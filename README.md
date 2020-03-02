@@ -789,8 +789,8 @@ class MyForm extends React.Component {
   - Proforma.config.customOnChangeObject: _object_
 
     - There might be times when you want to have your own function executed when a form field is changed instead of Proforma's internal change handler method. This need may arise if you want to perform multi-stage validation (.e.g a password strength indicator), or restrict the user's input in a particular form field. [(See some use-cases here.)](#using-proformaconfigcustomonchange)
-    - Each property on the `customOnChange` object should be a name that corresponds with one of your form field names.
-    - Each value on the `customOnChange` object should be a function that accepts two arguments:
+    - Each property on the `customOnChangeObject` should be a name that corresponds with one of your form field names.
+    - Each value on the `customOnChangeObject` should be a function that accepts two arguments:
       1. event: _React.ChangeEvent_ -- the change event emitted by React.
       2. setValues: _function_ -- a function that allows you to set the value of one or more of your form fields. **NOTE**: Since all form fields inside `Proforma` are controlled, **you will have to use `setValues` to update that particular form field yourself**. For example:
 
@@ -809,7 +809,12 @@ class MyForm extends React.Component {
       };
     }
     ```
+    
+  - Proforma.config.onValidateCallbacksObject: _object_
 
+    - There are some situations where it is useful to have a callback function called on every firing of a field's validation logic. If you need that functionality, you can access it here.
+    - Each property on the `onValidateCallbacksObject` should be a name that corresponds with one of your form field names.
+    - Each value on the `onValidateCallbacksObject` should be a function that accepts no arguments and returns void. I.e. `callback: () => void`.
   - Proforma.config.resetTouchedOnFocus: _boolean_
     - A simple boolean flag that, if true, resets the 'touched' value of each field name back to `false` when that field receives focus.
     - Defaults to `false`.

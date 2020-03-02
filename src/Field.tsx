@@ -23,7 +23,9 @@ function memoCompare<T = any>(
   prevProps: MemoComparePropsType<T>,
   nextProps: MemoComparePropsType<T>
 ): boolean {
-  return prevProps.value === nextProps.value;
+  return (
+    prevProps.value === nextProps.value && prevProps.type === nextProps.type
+  );
 }
 
 // ==== STANDARD INPUT ====
