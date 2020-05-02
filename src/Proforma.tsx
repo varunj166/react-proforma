@@ -19,7 +19,7 @@ type HandleSubmitBundle = {
 
 interface IProps<V> {
   config: IConfigObject<V>;
-  handleSubmit: (values: V, handleSubmitBag: HandleSubmitBundle) => any;
+  handleSubmit: (values: V, handleSubmitBundle: HandleSubmitBundle) => any;
   children: (proformaBundle: ProformaBundle<V>) => JSX.Element;
 }
 
@@ -46,13 +46,18 @@ export type ProformaStateType<V> = Pick<
  * @param {Object} config.initialValues - an object containing the initial values for your form data. The name for each piece of form data MUST exist on this object, or it will not be included in any of the internal processing.
  * @param {Object=} [config.validationObject] - an object containing any validation you wish to have performed on any (or all) form data. See docs for more information.
  * @param {Object=} [config.customOnChangeObject] - an object containing the names of any field that you wish to have a custom onChange operation performed. If present for a given name, the provided onChange function will be executed instead of the internal React Proforma change handler. See docs for more information.
+ * @param {Object=} [config.onValidateCallbacksObject] - an object containing the names of any field that you wish to have a custom callback function called after each validation cycle. If present for a given name, the provided callback function will be executed upon the completion of each validation cycle. See docs for more information.
  * @param {boolean=} [config.resetTouchedOnFocus=false] - boolean flag that, if set to true, causes the "touched" status for fields to reset whenever the field has focus. Defaults to false.
  * @param {boolean=} [config.validateOnChange=true] - boolean flat that, if set to false, will not run validation for fields on change. Defaults to true.
- * @param {Function} handleSubmit - The function to be executed when your form is submitted. The function will be executed with the following arguments:
+ * @param {Function} handleSubmit - The function to be executed when your form is submitted. The function will be executed with the following two arguments:
  * <br/>(1) values - an object containing the current form values.
- * <br/>(2) setSubmitting - a function that enables you to change the submission status of your form, with signature: (setTo: boolean) => void
- * <br/>(3) setComplete - a function that enables you to change the completion status of your form, with signature: (setTo: boolean) => void
- * <br/>(4) event - the original form submission React event.
+ * <br/>(2) HandleSubmitBundle - an object containing useful methods and properties for your form submission:
+ * <br/>(i) setSubmitting - a function that enables you to change the submission status of your form, with signature: (setTo: boolean) => void
+ * <br/>(ii) setComplete - a function that enables you to change the completion status of your form, with signature: (setTo: boolean) => void
+ * <br/>(iii) setValues - a function that enables you to set the values of any of your form fields, with signature: (setToObject: object) => void
+ * <br/>(iv) resetFields - a function that resets all of your form fields back to the initial values, with signature: () => void
+ * <br/>(v) submitCount - a property that represents the number of times this form has been submitted.
+ * <br/>(vi) event - the original form submission React event.
  * @returns {JSX.Element | null} - JSX.Element or null (null if no children are provided)
  */
 export class Proforma<V> extends React.PureComponent<
