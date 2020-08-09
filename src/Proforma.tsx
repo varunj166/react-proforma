@@ -3,19 +3,10 @@ import {
   IndexableObjectType,
   IConfigObject,
   ProformaBundle,
-  SetValuesType
+  HandleSubmitBundle
 } from './types';
 import { generateStateObject, validator } from './helpers';
 import { ProformaContextProvider } from './ProformaContext';
-
-type HandleSubmitBundle = {
-  setSubmitting: (setTo: boolean) => any;
-  setComplete: (setTo: boolean) => any;
-  setValues: SetValuesType;
-  resetFields: () => void;
-  submitCount: number;
-  event: React.FormEvent<HTMLFormElement> | React.SyntheticEvent<HTMLElement>;
-};
 
 interface IProps<V> {
   config: IConfigObject<V>;

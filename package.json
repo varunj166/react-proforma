@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/varunj166/react-proforma#readme",
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": ">=16.8.0"
   },
   "dependencies": {
     "memoize-one": "^5.1.1"

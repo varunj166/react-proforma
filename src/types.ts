@@ -70,3 +70,17 @@ export interface ProformaBundle<V> {
   setSubmitting: (setTo: boolean) => void;
   setComplete: (setTo: boolean) => void;
 }
+
+export type HandleSubmitBundle = {
+  setSubmitting: (setTo: boolean) => any;
+  setComplete: (setTo: boolean) => any;
+  setValues: SetValuesType;
+  resetFields: () => void;
+  submitCount: number;
+  event: React.FormEvent<HTMLFormElement> | React.SyntheticEvent<HTMLElement>;
+};
+
+export type SubmissionHandler<V> = (
+  values: V,
+  handleSubmitBundle: HandleSubmitBundle
+) => void;
